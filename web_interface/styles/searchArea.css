@@ -1,0 +1,137 @@
+#searchArea {
+	width: 50vw;
+	min-width: 40vw;
+	max-width: 60vw;
+	height: auto;
+	border: 1px solid #262626;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-around;
+	flex-direction: column;
+	position: relative;
+	margin: auto;
+	margin-top: 6rem;
+	border: none;
+	z-index: 10;
+}
+
+#searchBox {
+	display: flex;
+	width: 100%;
+	height: 2.5rem;
+	padding-right: 4rem;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+	margin-bottom: .7rem;
+	z-index: 100;
+}
+
+#searchBox input {
+	width: 100%;
+	height: 100%;
+	font-size: 17px;
+	padding-left: 105px;
+	outline: 0;
+	border-radius: 4px;
+	border: 2px solid #e0d0c4;
+	border: 2px solid rgb(221, 219, 200);
+	box-shadow: none;
+	position: absolute;
+}
+
+#searchBox button {
+	height: 100%;
+	background-color: rgb(221, 219, 200);
+	width: 100px;
+	font-size: 17px;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+	z-index: 1;
+	left: 0;
+}
+
+#searchResults {
+	position: absolute;
+	width: 100%;
+	min-height: 3rem;
+	max-height: 24rem;
+	background-color: #f1f0f0;
+	margin-top: .1rem;
+	overflow: scroll;
+	padding: 5px 0 10px 6px;
+	display: none;
+	z-index: 100;
+	top: 4rem;
+}
+
+.movieImageContainer {
+	width: 4.6rem;
+	height: 90%;
+	overflow: hidden;
+}
+
+.well {
+	width: 100%;
+	height: 6rem;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 1rem;
+	position: relative;
+
+}
+
+.movieInfo {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: .4rem;
+	flex-direction: column;
+	width: 90%;
+}
+
+.ratingContainer {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: .4rem;
+}
+
+.SearchRatingIcon {
+	width: 1.1rem;
+	height: auto;
+
+}
+
+.movieDetail {
+	margin-right: 1rem;
+}
+
+.movieDetail img {
+	width: 1.4rem;
+	height: auto;
+}
+
+.titleSearch {
+	font-size: 1rem;
+	font-weight: 800;
+	color: #262626;
+	width: 60%;
+}
+
+.ratingSearch {
+	font-size: .9rem;
+	color: #262525c1;
+}
+
+.releaseDateSearch {
+	font-size: .9rem;
+	color: #262525c1;
+}
+
+.movieSearchPoster {
+	width: 105%;
+	height: 110%;
+}

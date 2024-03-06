@@ -1,0 +1,95 @@
+#hero {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 3rem;
+}
+
+#mainContent,
+#latestShows,
+#topRatedShows {
+	display: flex;
+	flex-direction: column;
+	width: 95%;
+	height: 16rem;
+	margin: auto;
+	z-index: 2;
+}
+
+#latestShows,
+#topRatedShows {
+	margin-top: 1.5rem;
+}
+
+#mainContent h1,
+#latestShows h1,
+#topRatedShows h1 {
+	font-size: 1.7rem;
+	font-weight: 700;
+	color: #262626;
+	margin: .3rem 0;
+	width: 100%;
+}
+
+#mainContent #mainContentBody,
+#latestShowsBody,
+#topRatedShowsBody {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	width: 100%;
+	height: 100%;
+	overflow-x: scroll;
+	overflow-y: hidden;
+}
+
+#mainContent #mainContentBody .movieCard,
+#latestShowsBody .movieCard,
+#topRatedShowsBody .movieCard {
+	width: 9rem;
+	min-width: 9rem;
+	height: 100%;
+	background-color: #fff;
+	position: relative;
+}
+
+.movieImage {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.ratingContainerBody {
+	display: flex;
+	width: 2.4rem;
+	height: 2.5rem;
+	position: absolute;
+	top: 3px;
+	left: 3px;
+}
+
+.ratingIconBody {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+.ratingContainerBody .rating {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: .7rem;
+	font-weight: 700;
+	color: #3d3636;
+
+}
+
+.movieImage img {
+	width: 100%;
+	height: 100%;
+}
