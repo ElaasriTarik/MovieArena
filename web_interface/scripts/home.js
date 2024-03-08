@@ -17,7 +17,7 @@ $(function () {
 				for (let i = 0; i < movies.length; i++) {
 					$('#searchResults').append(`
 						<div class="col-md-3">
-							<div class="well text-center">
+							<div class="well text-center searchContent" data-movie-id="${latestMovies[i].id}" data-content="movie"">
 								<div class="movieImageContainer">
 									<img src="https://image.tmdb.org/t/p/w500${movies[i].poster_path}" alt="Movie Poster" class="movieSearchPoster">
 								</div>
@@ -36,7 +36,10 @@ $(function () {
 			}
 		})
 	});
-	$(window).click(function () {
-		$('#searchResults').css('display', 'none');
+	$(document).on('click', function (e) {
+		if ($(e.target).closest('#searchResults').length) {
+			// This will be executed when an ancestor of #searchResults is clicked
+			$('#searchResults').css('display', 'none'); // This will hide the #searchResults element
+		}
 	});
 });

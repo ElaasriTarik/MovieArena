@@ -9,10 +9,11 @@
 	<link rel="stylesheet" href="styles/header.css">
 	<link rel="stylesheet" href="styles/searchArea.css">
 	<link rel="stylesheet" href="styles/body.css">
+	<link rel="stylesheet" href="styles/movie.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="scripts/home.js"></script>
 	<script src="scripts/latests.js"></script>
-	<script src="scripts/redirectToMoviePage.js" defer></script>
+
 </head>
 
 <body>
@@ -47,29 +48,29 @@
 		</div>
 	</div>
 
-	<div id="hero">
-		<div id="mainContent">
-			<div id="mainContentTitle">
-				<h1>Popular</h1>
-			</div>
-			<div id="mainContentBody">
-			</div>
-		</div>
-		<div id="latestShows">
-			<div id="latestShowsTitle">
-				<h1>Latest Shows</h1>
-			</div>
-			<div id="latestShowsBody">
-			</div>
-		</div>
-		<div id="topRatedShows">
-			<div id="topRatedShowsTitle">
-				<h1>Top Rated</h1>
-			</div>
-			<div id="topRatedShowsBody">
-			</div>
-		</div>
+	<div id="movieInfo">
+		<div id="moviePosterFav">
 
+		</div>
+		<div class="movieDetails">
+
+
+		</div>
+		<div class="watchProviders">
+			<h2 class="whereTilte">Where to watch?</h2>
+			<div class="watchProvidersContainer">
+
+			</div>
+			<div class="justWatchContainer">
+				<a href="justwatch.com">
+					<img src="images/JustWatch-logo-large.png" alt="powered by justWatch">
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<script src="scripts/redirectToMoviePage.js"></script>
+	<script src="scripts/getContentID.js"></script>
 </body>
 
 </html>

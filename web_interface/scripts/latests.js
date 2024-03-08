@@ -11,7 +11,7 @@ $(() => {
 			latestMovies = data.results;
 			for (let i = 0; i < latestMovies.length; i++) {
 				$('#mainContentBody').append(`
-					<div class="movieCard">
+					<div class="movieCard" data-movie-id="${latestMovies[i].id}" data-content="movie">
 							<div class="movieImage">
 							<div class="ratingContainerBody">
 									<img src="images/star.png" alt="Rating" class="ratingIconBody">
@@ -37,7 +37,7 @@ $(() => {
 			console.log(latestShows);
 			for (let i = 0; i < latestShows.length; i++) {
 				$('#latestShowsBody').append(`
-					<div class="movieCard">
+					<div class="movieCard" data-movie-id="${latestShows[i].id}" data-content="tv">
 					<div class="ratingContainerBody">
 									<img src="images/star.png" alt="Rating" class="ratingIconBody">
 									<p class="rating">${latestShows[i].vote_average.toFixed(1)}</p>
@@ -63,8 +63,8 @@ $(() => {
 			console.log(topRatedShows);
 			for (let i = 0; i < topRatedShows.length; i++) {
 				$('#topRatedShowsBody').append(`
-					<div class="movieCard">
-							<div class="movieImage" data-id="${topRatedShows}">
+					<div class="movieCard" data-movie-id="${topRatedShows[i].id}" data-content="tv">
+							<div class="movieImage">
 								<div class="ratingContainerBody">
 									<img src="images/star.png" alt="Rating" class="ratingIconBody">
 									<p class="rating">${topRatedShows[i].vote_average.toFixed(1)}</p>
