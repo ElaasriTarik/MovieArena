@@ -10,7 +10,7 @@ $(window).on('load', function () {
 		// 	makeActive()
 		// })
 
-		//console.log(moviesCards);
+		console.log(moviesCards);
 
 	});
 });

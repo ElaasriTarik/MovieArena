@@ -45,14 +45,15 @@
 #user_box {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: space-around;
 	padding: 0 .4rem;
-	max-width: 10rem;
+	max-width: 15rem;
 }
 
 #user_image {
-	width: 2rem;
-	height: 2rem;
+	min-width: 2rem;
+	min-height: auto;
+	max-width: 2.2rem;
 	border-radius: 50%;
 	margin: .6rem;
 }
@@ -63,10 +64,13 @@
 	border-radius: 50%;
 }
 
+#user_name {}
+
 #user_name a {
 	font-size: 1rem;
 	font-weight: bold;
 	margin: .5rem;
 	color: #353535;
 	font-weight: 800;
+	width: 100%;
 }

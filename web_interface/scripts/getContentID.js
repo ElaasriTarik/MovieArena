@@ -54,7 +54,7 @@ $(window).on('load', function () {
 					success: (providers) => {
 						watchProvidersUS = providers.results;
 						console.log(watchProvidersUS);
-						tvORmovie = contentType === 'tv' ? watchProvidersUS.TW.flatrate : watchProvidersUS.US.buy
+						tvORmovie = contentType === 'tv' ? watchProvidersUS.TW.flatrate || watchProvidersUS.AE.flatrate : watchProvidersUS.AE.flatrate || watchProvidersUS.US.buy;
 						const watch = tvORmovie.map((item) => {
 							return `<div class="providerBox">
 								<img src="https://image.tmdb.org/t/p/original/${item.logo_path}" alt="${item.provider_name}" class="providerLogo">

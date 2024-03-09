@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Movie Arena Home page</title>
+	<link rel="stylesheet" href="styles/home.css">
+	<link rel="stylesheet" href="styles/header.css">
+	<link rel="stylesheet" href="styles/login.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="scripts/home.js"></script>
+	<script src="scripts/forms.js" defer></script>
+	<script src="scripts/userProfile.js" defer></script>
+
+</head>
+
+<body>
+
+	<header id="header">
+		<div id="page_logo">
+			<a href="home.html">
+				<img src="images/alogo-2.png" alt="" srcset="" class="page_logo">
+			</a>
+		</div>
+
+		<ul class="list_titles">
+			<li><a href="home.html">Home</a></li>
+			<li><a href="#">About</a></li>
+			<li><a href="#">Help</a></li>
+		</ul>
+		<div id="user_box">
+			<div id="user_name">
+				<p><a href="userProfile.html" id="username">John Doe</a></p>
+			</div>
+			<div id="user_image">
+				<img src="images/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+					class="user_image">
+			</div>
+		</div>
+	</header>
+
+	<div class="loginBox">
+		<div class="loginFormContainer">
+			<form class="loginForm">
+				<div class="loginTitle">
+					<h1>Log-in</h1>
+				</div>
+				<div class="loginInput usernameLoginInput">
+					<input type="text" name="username" id="username" placeholder="Username">
+					<p class="userNotFound"></p>
+				</div>
+				<div class="loginInput">
+					<input type="password" name="password" id="password" placeholder="Password">
+				</div>
+				<div class="loginButton">
+					<button type="submit" class="loginButton">Login</button>
+				</div>
+				<a href="signup.html">Sign-up</a>
+			</form>
+		</div>
+	</div>
+
+</body>
+
+</html>
