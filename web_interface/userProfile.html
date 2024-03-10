@@ -9,7 +9,9 @@
 	<link rel="stylesheet" href="styles/header.css">
 	<link rel="stylesheet" href="styles/userProfile.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="scripts/home.js"></script>
 	<script src="scripts/userProfile.js" defer></script>
+	<script src="scripts/logout.js" defer></script>
 
 </head>
 
@@ -51,13 +53,16 @@
 				<div class="userUsername">
 					<p class="profileUsername">john_doe</p>
 				</div>
+				<div class="logOutSection">
+					<button class="logOutButton">Log out</button>
+				</div>
 			</div>
 		</div>
 		<div class="aboutUser">
 			<div class="moviesLiked likedMS">
 				<div class="LikedAndCount">
 					<h2>Movies liked</h2>
-					<h4 class="NumberOfMovies">101</h4>
+					<h4 class="NumberOfMovies">0</h4>
 				</div>
 				<div id="mainContent">
 					<div id="mainContentBody">
@@ -67,10 +72,10 @@
 			<div class="SeriesLiked likedMS">
 				<div class="LikedAndCount">
 					<h2>Series liked</h2>
-					<h4 class="NumberOfSeries">101</h4>
+					<h4 class="NumberOfSeries">0</h4>
 				</div>
 				<div id="mainContent">
-					<div id="mainContentBody">
+					<div id="mainContentBodySeries">
 					</div>
 				</div>
 			</div>

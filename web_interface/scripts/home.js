@@ -1,4 +1,6 @@
 $(function () {
+	// check user login status
+
 	// Get the search input
 	const searchInput = $('#searchText');
 	searchInput.on('input', (e) => {
@@ -12,12 +14,12 @@ $(function () {
 			},
 			success: (data) => {
 				movies = data.results;
-				console.log(movies);
+				//console.log(movies);
 				$("#searchResults").empty();
 				for (let i = 0; i < movies.length; i++) {
 					$('#searchResults').append(`
 						<div class="col-md-3">
-							<div class="well text-center searchContent" data-movie-id="${latestMovies[i].id}" data-content="movie"">
+							<div class="well text-center searchContent movieCardSearch" data-movie-id="${movies[i].id}" data-content="movie">
 								<div class="movieImageContainer">
 									<img src="https://image.tmdb.org/t/p/w500${movies[i].poster_path}" alt="Movie Poster" class="movieSearchPoster">
 								</div>
@@ -34,12 +36,18 @@ $(function () {
 					`);
 				}
 			}
-		})
+		}).done(function (response) {
+			const movieCards = $('.movieCardSearch').toArray();
+			movieCards.forEach(card => {
+				console.log(card);
+				card.addEventListener('click', (event) => {
+					console.log('clicked');
+					const contentID = event.currentTarget.dataset.movieId;
+					const contentType = 'movie';
+					window.location.href = `movie.html?type=${contentType}&id=${contentID}`;
+				});
+			});
+		});
 	});
-	$(document).on('click', function (e) {
-		if ($(e.target).closest('#searchResults').length) {
-			// This will be executed when an ancestor of #searchResults is clicked
-			$('#searchResults').css('display', 'none'); // This will hide the #searchResults element
-		}
-	});
+
 });

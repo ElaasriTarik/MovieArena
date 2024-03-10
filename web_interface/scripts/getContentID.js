@@ -24,16 +24,10 @@ $(window).on('load', function () {
 				data.genres.forEach((item) => {
 					gg.push(`<spans id="genres">${item.name}</spans>`)
 				})
-				$('#moviePosterFav').append(`
-					<div class="moviePoster">
-						<span class="contentStatus">${data.status}</span>
-						<img alt="" class="movieImg" src="https://image.tmdb.org/t/p/w500${data.poster_path}">
-					</div>
-					<div class="favButton">
-						<img src="" alt="" class="addToFavourites">
-						<button type="button">Add to Favourites</button>
-					</div>
-			`);
+				$('.movieImg').attr('src', `https://image.tmdb.org/t/p/original/${data.poster_path}`);
+				$('.moviePoster').attr('data-movie-id', data.id);
+				$('.contentStatus')[0].textContent = data.status;
+				console.log(data.status, $('.contentStatus'));
 				$('.movieDetails').append(
 					`<h1 class="mainTitleMovie">${contentType == 'tv' ? data.name : data.title}</h1>
 			<p class="releaseDate">${airTime}</p>
@@ -46,6 +40,7 @@ $(window).on('load', function () {
 			<h4 class="genres"><bold>Genres: </bold>${gg.join(' ')}
 			</h4>`
 				);
+
 				// get the watch providers list
 				$.ajax({
 					type: 'GET',

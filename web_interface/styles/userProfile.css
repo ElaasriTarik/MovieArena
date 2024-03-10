@@ -56,12 +56,31 @@
 	color: #5a5858;
 }
 
+.userDetails .logOutButton {
+	width: 6rem;
+	height: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #c08a8a;
+	color: #fff;
+	font-size: 1rem;
+	font-weight: 700;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+
+}
+
 .aboutUser {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	padding-top: 2rem;
 	gap: 1rem;
+	width: 85%;
+	position: relative;
+	overflow: hidden;
 }
 
 .LikedAndCount {
@@ -89,21 +108,21 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	height: 11rem;
+	height: 13.4rem;
 	margin: auto;
 	z-index: 2;
-	background-color: rgb(167, 160, 152);
 }
 
 
 #mainContent #mainContentBody,
 #latestShowsBody,
-#topRatedShowsBody {
+#topRatedShowsBody,
+#mainContentBodySeries {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	align-items: flex-start;
 	gap: 1rem;
-	width: 100%;
+	width: 90%;
 	height: 100%;
 	overflow-x: scroll;
 	overflow-y: hidden;
@@ -111,7 +130,9 @@
 
 #mainContent #mainContentBody .movieCard,
 #latestShowsBody .movieCard,
-#topRatedShowsBody .movieCard {
+#topRatedShowsBody .movieCard,
+#mainContentBodySeries .movieCard,
+#mainContentBodySeries .movieCard {
 	width: 9rem;
 	min-width: 9rem;
 	height: 100%;

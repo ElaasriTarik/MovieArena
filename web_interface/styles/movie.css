@@ -64,7 +64,18 @@
 	border: none;
 	font-size: 20px;
 	font-weight: 800;
-	color: rgb(81, 106, 128);
+	color: rgb(38, 42, 45);
+	cursor: pointer;
+	position: absolute;
+	z-index: 99;
+}
+
+.favButton .addToFavourites {
+	position: absolute;
+	left: 1rem;
+	width: 2rem;
+	height: auto;
+	z-index: 100;
 }
 
 .movieDetails {

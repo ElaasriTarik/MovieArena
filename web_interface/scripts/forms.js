@@ -1,8 +1,9 @@
 const loginForm = document.querySelector('.loginForm');
 loginForm.addEventListener('submit', (e) => {
 	e.preventDefault();
-	const username = document.getElementById('username').value;
+	const username = document.querySelector('#formUsername').value;
 	const password = document.getElementById('password').value;
+	console.log(username, password);
 	fetch('http://localhost:5500/login', {
 		method: 'POST',
 		headers: {
@@ -26,7 +27,7 @@ loginForm.addEventListener('submit', (e) => {
 				// const username_on_page = document.getElementById('username_on_page');
 				// username_on_page.textContent = data[0].username;
 				localStorage.setItem('username', username);
-				localStorage.setItem('fullname', fullname);
+				localStorage.setItem('fullname', data[0].fullname);
 				window.location.href = '/web_interface/home.html';
 			}
 		});
