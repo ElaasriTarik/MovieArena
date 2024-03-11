@@ -3,7 +3,7 @@ const connection = mysql.createConnection({
 	host: 'moviearena.c94ckwwumw1x.us-east-1.rds.amazonaws.com',
 	user: 'tarek',
 	port: '3306',
-	password: 'tarek112233',
+	password: none,
 	database: 'my_db'
 });
 const express = require('express');
