@@ -13,7 +13,10 @@ $(window).on('load', function () {
 			type: 'GET',
 			headers: headers,
 			success: (data) => {
-				chechIFfavs(data)
+				const checkIfUserLoggedIn = localStorage.getItem('username');
+				if (checkIfUserLoggedIn !== null) {
+					chechIFfavs(data)
+				}
 				console.log(data);
 				let airTime = ''
 				if (contentType === 'tv') {
@@ -70,7 +73,7 @@ $(window).on('load', function () {
 					headers: headers,
 					success: (actors) => {
 						actors = actors.cast;
-						console.log(actors);
+						//console.log(actors);
 						const actorsList = actors.map((actor) => {
 							return `<div class="actorBox">
 							<div class="actorImg">
@@ -81,6 +84,29 @@ $(window).on('load', function () {
 						`
 						})
 						$('.actors').append(actorsList.join(''))
+					}
+				})
+				// get similar movie
+				$.ajax({
+					type: 'GET',
+					url: `https://api.themoviedb.org/3/${contentType}/${contentID}/similar?language=en-US`,
+					headers: headers,
+					success: (similar) => {
+						similar = similar.results;
+						//console.log(similar);
+						const similarList = similar.map((item) => {
+							const title = contentType == 'tv' ? item.name : item.title;
+							return `<div class="movieBox movieCard" data-movie-id="${item.id}" data-content-type="${contentType}">
+							<div class="similarMovieImg">
+								<img src="https://image.tmdb.org/t/p/original/${item.poster_path}" alt="${title}">
+								</div>
+								<p class="similarMovieTitle">${title}</p>
+							</div>
+						`
+						})
+						$('.similarMovies').append(similarList.join(''))
+						makeCardActive();
+						getComments();
 					}
 				})
 			}
@@ -98,12 +124,91 @@ function chechIFfavs(data) {
 	})
 		.then((response) => response.json())
 		.then((data) => {
-			console.log(data);
+			//console.log(data);
 			if (data.message === 'success') {
 				const addToFavsBtn = $('#addToFavsBtn')[0];
 				addToFavsBtn.textContent = 'In your favourites!';
 				addToFavsBtn.style.backgroundColor = '#bdffbd';
 				addToFavsBtn.dataset.fav = 'true';
 			}
+		});
+}
+
+function makeCardActive() {
+	const movieCards = $('.movieCard').toArray();
+	movieCards.forEach(card => {
+		card.addEventListener('click', (event) => {
+			const contentID = event.currentTarget.dataset.movieId;
+			const contentType = event.currentTarget.dataset.contentType;
+			window.location.href = `movie.html?type=${contentType}&id=${contentID}`;
+		});
+	});
+}
+
+const addCommentBtn = $('#addCommentBtn')[0];
+addCommentBtn.addEventListener('click', (e) => {
+	if (localUsername === null) {
+		alert('You need to be logged in to add a comment');
+		return;
+	}
+	const comment = document.querySelector('#comment').value;
+	fetch('http://localhost:5500/addComment', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			contentType: contentType,
+			contentID: contentID,
+			username: localStorage.getItem('username'),
+			comment: comment
+		})
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			console.log(data);
+			if (data.message === 'success') {
+				$('#comment').val('');
+				console.log('Comment added successfully');
+				getComments();
+				//$('#commentSuccess').css('display', 'block');
+				//$('#commentSuccess').text('Comment added successfully');
+				// setTimeout(() => {
+				// 	$('#commentSuccess').css('display', 'none');
+				// }, 3000);
+			}
+		});
+});
+
+function getComments() {
+	fetch(`http://localhost:5500/getComments?contentType=${contentType}&contentID=${contentID}`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			console.log(data);
+			const comments = data.map((comment) => {
+				return `
+				<div class="commentBox">
+				<div class="commentUser">
+					<img src="images/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+						alt="" class="userImage">
+				</div>
+				<div class="commentContent">
+					<div class="userAndDate">
+						<p class="username">${comment.username}</p>
+						<p class="dateCommented">${comment.timestamp.split('T')[0]}</p>
+					</div>
+					<p class="comment">${comment.content}</p>
+				</div>
+			</div>
+			`
+			})
+			console.log(comments);
+			$('.comments').empty();
+			$('.comments').append(comments.join(''))
 		});
 }

@@ -17,15 +17,21 @@ if (localFullname && userFullName && userUsername) {
 
 // get the user's favorite movies
 console.log('localusername', localUsername);
-fetch(`http://localhost:5500/getFavs?username=${localUsername}`, {
-	method: 'GET',
-	headers: {
-		'Content-Type': 'application/json'
-	}
-})
-	.then((response) => response.json())
-	.then((data) => { populateFavs(data); })
-	.catch(error => console.log(error));
+const checkIfUserLoggedIn = localStorage.getItem('username');
+if (checkIfUserLoggedIn) {
+	//alert('You need to be logged in to see your favourites');
+
+
+	fetch(`http://localhost:5500/getFavs?username=${localUsername}`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	})
+		.then((response) => response.json())
+		.then((data) => { populateFavs(data); })
+		.catch(error => console.log(error));
+}
 
 function populateFavs(data) {
 	console.log(data);
@@ -53,6 +59,7 @@ function populateFavs(data) {
 	}
 	enableClick();
 }
+
 
 function enableClick() {
 	const movieCards = $('.movieCard').toArray();

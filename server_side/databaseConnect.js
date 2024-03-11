@@ -83,7 +83,7 @@ function getAllUsers(callback) {
 }
 
 // creating movies table
-// const createMoviesTable = `CREATE TABLE IF NOT EXISTS movies (title VARCHAR(255), id INT, user_id INT, poster_path VARCHAR(255))`;
+// const createMoviesTable = `CREATE TABLE IF NOT EXISTS movies (title VARCHAR(255), id INT , user_id INT, poster_path VARCHAR(255))`;
 // connection.query(createMoviesTable, (error, results, fields) => {
 // 	if (error) throw error;
 // 	console.log('movies table created');
@@ -94,6 +94,24 @@ function getAllUsers(callback) {
 // 	if (error) throw error;
 // 	console.log('series table created');
 // });
+const alterMovies = `ALTER TABLE movies ADD movieID INT PRIMARY KEY AUTO_INCREMENT;`
+const alterSeries = `ALTER TABLE series ADD serieID INT PRIMARY KEY AUTO_INCREMENT;`
+// connection.query(alterSeries, (error, results, fields) => {
+// 	if (error) throw error;
+// 	console.log('series table altered');
+// })
+//const ratingTable = `ALTER TABLE ratings ADD FOREIGN KEY (movieID) REFERENCES movies(movie_id);`
+// const commentTable = `CREATE TABLE comments (
+//     commentID INT PRIMARY KEY AUTO_INCREMENT,
+//     movieID INT,
+//     userID INT,
+// 	username VARCHAR(255),
+//     content TEXT,
+//     timestamp DATETIME,
+// 	FOREIGN KEY(movieID) REFERENCES movies(movieID),
+// 	FOREIGN KEY(userID) REFERENCES users(id)
+// );`
+
 
 app.post('/addToFavs', (req, res) => {
 	//console.log(req.body);
@@ -237,7 +255,61 @@ app.post('/removeFav', (req, res) => {
 		}
 	});
 });
+//create a moviesCommentTable
+const addCommentsTable = `CREATE TABLE IF NOT EXISTS comments (
+	commentID INT PRIMARY KEY AUTO_INCREMENT,
+	movieID INT,
+	userID INT,
+	username VARCHAR(255),
+	content TEXT,
+	timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+);`
 
+
+// adding comments 
+app.post('/addComment', (req, res) => {
+	const { contentType, contentID, username, comment } = req.body;
+	const isMovieOrSerie = contentType === 'movie' ? 'movie' : 'series';
+	const getUserId = `SELECT * FROM users WHERE username = ?;`;
+	connection.query(getUserId, [username], (error, results, fields) => {
+		if (error) {
+			console.error(error);
+			res.status(500).send({ message: 'Database error' });
+			return;
+		}
+
+		const userID = results[0].id;
+		movieID = parseInt(contentID);
+
+		const checkMovieExists = `SELECT * FROM ${isMovieOrSerie}s WHERE id = ? AND user_id = ?;`;
+		movieID = contentID;
+		console.log(contentID, movieID, userID, username,);
+		const insertComment = `INSERT INTO comments (movieID, userID, username, content, type, timestamp) VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP);`;
+		connection.query(insertComment, [movieID, userID, username, comment, isMovieOrSerie], (error, results, fields) => {
+			if (error) {
+				console.error(error);
+				res.status(500).send({ message: 'Database error' });
+				return;
+			}
+			res.send({ message: 'success' });
+		});
+	});
+});
+// get comments
+app.get('/getComments', (req, res) => {
+	const { contentType, contentID } = req.query;
+	const isMovieOrSerie = contentType === 'movie' ? 'movie' : 'series';
+	const getComments = `SELECT * FROM comments WHERE movieID = ? AND type = ?;`;
+	connection.query(getComments, [contentID, isMovieOrSerie], (error, results, fields) => {
+		if (error) {
+			console.error(error);
+			res.status(500).send({ message: 'Database error' });
+			return;
+		}
+		console.log(results);
+		res.send(results);
+	});
+});
 
 
 function getAllMovies(userID) {
@@ -271,6 +343,8 @@ function checkUser(username) {
 		});
 	});
 }
+
+
 
 app.listen(5500, () => {
 	console.log('Server is running on port 5500');

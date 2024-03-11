@@ -6,7 +6,11 @@ addToFavsBtn.addEventListener('click', (e) => {
 	const movieId = document.querySelector('.moviePoster').dataset.movieId;
 	const moviePoster = document.querySelector('.movieImg').src;
 	const movieTitle = document.querySelector('.mainTitleMovie').textContent;
-
+	const checkIfUserLoggedIn = localStorage.getItem('username');
+	if (checkIfUserLoggedIn === null) {
+		//alert('You need to be logged in to add to favourites');
+		return;
+	}
 	if (e.target.dataset.fav === 'true') {
 		e.target.dataset.fav = 'false';
 		removeFav(e, movieId, movieTitle, moviePoster);

@@ -12,3 +12,21 @@ a {
 body {
 	background-color: floralwhite;
 }
+
+*::-webkit-scrollbar {
+	width: 6px;
+	height: 4px;
+	/* Width of the entire scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0);
+	/* Color of the track */
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: rgb(175, 175, 174);
+	/* Color of the scrollbar handle */
+	border-radius: 5px;
+	/* Roundness of the scrollbar handle */
+}
