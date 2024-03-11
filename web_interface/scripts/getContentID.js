@@ -13,6 +13,7 @@ $(window).on('load', function () {
 			type: 'GET',
 			headers: headers,
 			success: (data) => {
+				chechIFfavs(data)
 				console.log(data);
 				let airTime = ''
 				if (contentType === 'tv') {
@@ -27,18 +28,20 @@ $(window).on('load', function () {
 				$('.movieImg').attr('src', `https://image.tmdb.org/t/p/original/${data.poster_path}`);
 				$('.moviePoster').attr('data-movie-id', data.id);
 				$('.contentStatus')[0].textContent = data.status;
+
 				console.log(data.status, $('.contentStatus'));
 				$('.movieDetails').append(
-					`<h1 class="mainTitleMovie">${contentType == 'tv' ? data.name : data.title}</h1>
-			<p class="releaseDate">${airTime}</p>
-			<h5 class="descritpion">${data.overview}</h5>
-			<div class="MovieRatingContainer">
-			<img src="images/star.png" alt="Rating" class="ratingIcon">
-			<h4 class="mainMovieRating"><span class="ratingNumber">${data.vote_average.toFixed(1)}</span> <span class="votesCount">(${data.vote_count} votes)</span></h4>
-			
-			</div>
-			<h4 class="genres"><bold>Genres: </bold>${gg.join(' ')}
-			</h4>`
+					`<div class="contentType">${contentType.toUpperCase()}</div>
+					<h1 class="mainTitleMovie">${contentType == 'tv' ? data.name : data.title}</h1>
+					<p class="releaseDate">${airTime}</p>
+					<h5 class="descritpion">${data.overview}</h5>
+					<div class="MovieRatingContainer">
+					<img src="images/star.png" alt="Rating" class="ratingIcon">
+					<h4 class="mainMovieRating"><span class="ratingNumber">${data.vote_average.toFixed(1)}</span> <span class="votesCount">(${data.vote_count} votes)</span></h4>
+
+					</div>
+					<h4 class="genres"><bold>Genres: </bold>${gg.join(' ')}
+					</h4>`
 				);
 
 				// get the watch providers list
@@ -49,7 +52,7 @@ $(window).on('load', function () {
 					success: (providers) => {
 						watchProvidersUS = providers.results;
 						console.log(watchProvidersUS);
-						tvORmovie = contentType === 'tv' ? watchProvidersUS.TW.flatrate || watchProvidersUS.AE.flatrate : watchProvidersUS.AE.flatrate || watchProvidersUS.US.buy;
+						tvORmovie = contentType === 'tv' ? watchProvidersUS.CA.flatrate || watchProvidersUS.AE.flatrate : watchProvidersUS.AE.flatrate || watchProvidersUS.US.buy;
 						const watch = tvORmovie.map((item) => {
 							return `<div class="providerBox">
 								<img src="https://image.tmdb.org/t/p/original/${item.logo_path}" alt="${item.provider_name}" class="providerLogo">
@@ -60,7 +63,47 @@ $(window).on('load', function () {
 						$('.watchProvidersContainer').append(watch.join(''))
 					}
 				})
+				// get actors
+				$.ajax({
+					type: 'GET',
+					url: `https://api.themoviedb.org/3/${contentType}/${contentID}/credits?language=en-US`,
+					headers: headers,
+					success: (actors) => {
+						actors = actors.cast;
+						console.log(actors);
+						const actorsList = actors.map((actor) => {
+							return `<div class="actorBox">
+							<div class="actorImg">
+								<img src="https://image.tmdb.org/t/p/original/${actor.profile_path}" alt="${actor.name}">
+								</div>
+								<p class="actorName">${actor.name}</p>
+							</div>
+						`
+						})
+						$('.actors').append(actorsList.join(''))
+					}
+				})
 			}
 		});
 	});
+	// check if movie is in favourites
+
 });
+function chechIFfavs(data) {
+	fetch(`http://localhost:5500/checkFav?username=${localStorage.getItem('username')}&movieId=${data.id}&contentType=${contentType}`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			console.log(data);
+			if (data.message === 'success') {
+				const addToFavsBtn = $('#addToFavsBtn')[0];
+				addToFavsBtn.textContent = 'In your favourites!';
+				addToFavsBtn.style.backgroundColor = '#bdffbd';
+				addToFavsBtn.dataset.fav = 'true';
+			}
+		});
+}

@@ -45,10 +45,22 @@ function populateFavs(data) {
 	}
 	for (let i = 0; i < seriesData.length; i++) {
 		$('#mainContentBodySeries').append(`
-					<div class="movieCard" data-movie-id="${seriesData[i].id}" data-content="movie">
+					<div class="movieCard" data-movie-id="${seriesData[i].id}" data-content="tv">
 							<div class="movieImage">
 								<img src="https://image.tmdb.org/t/p/w500${seriesData[i].poster_path}" alt="Movie Poster" class="moviePoster">
 							</div>
 					</div>`);
 	}
+	enableClick();
+}
+
+function enableClick() {
+	const movieCards = $('.movieCard').toArray();
+	movieCards.forEach(card => {
+		card.addEventListener('click', (event) => {
+			const contentID = event.currentTarget.dataset.movieId;
+			const contentType = event.currentTarget.dataset.content;
+			window.location.href = `movie.html?type=${contentType}&id=${contentID}`;
+		});
+	});
 }

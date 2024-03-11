@@ -25,6 +25,12 @@ connection.connect((error) => {
 		console.log('Connected to the database');
 	}
 });
+// const alterUsersTable = 'ALTER TABLE users ADD created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP';
+// connection.query(alterUsersTable, (error, results, fields) => {
+// 	if (error) throw error;
+// 	console.log('users table altered');
+// })
+
 app.post('/login', (req, res) => {
 	const { username, password } = req.body;
 	const getUser = `SELECT * FROM users WHERE username = ?;`;
@@ -77,20 +83,20 @@ function getAllUsers(callback) {
 }
 
 // creating movies table
-const createMoviesTable = `CREATE TABLE IF NOT EXISTS movies (title VARCHAR(255), id INT, user_id INT, poster_path VARCHAR(255))`;
-connection.query(createMoviesTable, (error, results, fields) => {
-	if (error) throw error;
-	console.log('movies table created');
-});
-// creating series table
-const createSeriesTable = `CREATE TABLE IF NOT EXISTS series (title VARCHAR(255), id INT, user_id INT, poster_path VARCHAR(255))`;
-connection.query(createSeriesTable, (error, results, fields) => {
-	if (error) throw error;
-	console.log('series table created');
-});
+// const createMoviesTable = `CREATE TABLE IF NOT EXISTS movies (title VARCHAR(255), id INT, user_id INT, poster_path VARCHAR(255))`;
+// connection.query(createMoviesTable, (error, results, fields) => {
+// 	if (error) throw error;
+// 	console.log('movies table created');
+// });
+// // creating series table
+// const createSeriesTable = `CREATE TABLE IF NOT EXISTS series (title VARCHAR(255), id INT, user_id INT, poster_path VARCHAR(255))`;
+// connection.query(createSeriesTable, (error, results, fields) => {
+// 	if (error) throw error;
+// 	console.log('series table created');
+// });
 
 app.post('/addToFavs', (req, res) => {
-	console.log(req.body);
+	//console.log(req.body);
 	const { movieId, moviePoster, movieTitle, username, contentType } = req.body;
 	const getUserId = `SELECT * FROM users WHERE username = ?;`;
 	let userID;
@@ -124,7 +130,7 @@ app.post('/addToFavs', (req, res) => {
 				});
 			}
 		});
-		getAllMovies(userID);
+		//getAllMovies(userID);
 
 	});
 })
@@ -132,7 +138,7 @@ app.post('/addToFavs', (req, res) => {
 // sending back user's fav movies
 app.get('/getFavs', (req, res) => {
 	const username = req.query.username;
-	console.log('server username', username);
+	//console.log('server username', username);
 	const getUserId = `SELECT * FROM users WHERE username = ?;`;
 	connection.query(getUserId, [username], (error, results, fields) => {
 		if (error) {
@@ -170,11 +176,72 @@ app.get('/getFavs', (req, res) => {
 	});
 })
 
+// check favs
+app.get('/checkFav', (req, res) => {
+	const { username, movieId, contentType } = req.query;
+	//console.log(username, movieId, contentType);
+	let userID;
+	const getUserId = `SELECT * FROM users WHERE username = ?;`;
+	connection.query(getUserId, [username], (error, results, fields) => {
+		if (error) {
+			console.error(error);
+			res.status(500).send({ message: 'Database error' });
+			return;
+		}
+		userID = results[0].id;
+		if (userID) {
+			console.log('userID', userID);
+			const isMovieOrSerie = contentType === 'movie' ? 'movies' : 'series';
+			const getMovie = `SELECT * FROM ${isMovieOrSerie} WHERE id = ? AND user_id = ?;`;
+			connection.query(getMovie, [parseInt(movieId), parseInt(userID)], (error, results, fields) => {
+				console.log(results);
+				if (error) {
+					console.error(error);
+					res.status(500).send({ message: 'Database error' });
+					return;
+				}
+				if (results.length > 0) {
+					res.send({ message: 'success' });
+				} else {
+					res.send({ message: 'fail' });
+				}
+			});
+		}
+	});
+
+});
+
+// remove from favs
+app.post('/removeFav', (req, res) => {
+	const { movieId, username, contentType } = req.body;
+	let userID;
+	const getUserId = `SELECT * FROM users WHERE username = ?;`;
+	connection.query(getUserId, [username], (error, results, fields) => {
+		if (error) {
+			console.error(error);
+			res.status(500).send({ message: 'Database error' });
+			return;
+		}
+		userID = results[0].id;
+		if (userID) {
+			const isMovieOrSerie = contentType === 'movie' ? 'movies' : 'series';
+			const removeMovie = `DELETE FROM ${isMovieOrSerie} WHERE id = ? AND user_id = ?;`;
+			connection.query(removeMovie, [movieId, userID], (error, results, fields) => {
+				if (error) {
+					console.error(error);
+					res.status(500).send({ message: 'Database error' });
+					return;
+				}
+				res.send({ message: 'success' });
+			});
+		}
+	});
+});
 
 
 
 function getAllMovies(userID) {
-	console.log('getting movies', userID);
+	//console.log('getting movies', userID);
 	const getMovies = `SELECT * FROM movies WHERE user_id = ?;`;
 	connection.query(getMovies, [userID], (error, results, fields) => {
 		if (error) {
@@ -185,6 +252,26 @@ function getAllMovies(userID) {
 	});
 
 }
+
+// function to check if user exists
+function checkUser(username) {
+	return new Promise((resolve, reject) => {
+		const getUserId = `SELECT * FROM users WHERE username = ?;`;
+		connection.query(getUserId, [username], (error, results, fields) => {
+			if (error) {
+				console.error(error);
+				reject(error);
+			}
+			if (results.length > 0) {
+				resolve(results[0].id);
+				//return (results[0].id);
+			} else {
+				resolve(false);
+			}
+		});
+	});
+}
+
 app.listen(5500, () => {
 	console.log('Server is running on port 5500');
 });

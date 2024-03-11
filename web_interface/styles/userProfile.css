@@ -48,6 +48,7 @@
 	font-size: 1.5rem;
 	font-weight: 700;
 	color: #343434;
+	width: max-content;
 }
 
 .userDetails .userUsername {
