@@ -7,12 +7,13 @@
 	<title>Movie Arena Home page</title>
 	<link rel="stylesheet" href="styles/home.css">
 	<link rel="stylesheet" href="styles/header.css">
-	<link rel="stylesheet" href="styles/login.css">
+	<link rel="stylesheet" href="styles/searchArea.css">
+	<link rel="stylesheet" href="styles/body.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="scripts/home.js"></script>
+	<script src="scripts/latests.js"></script>
+	<script src="scripts/redirectToMoviePage.js" defer></script>
 	<script src="scripts/userProfile.js" defer></script>
-	<script src="scripts/forms.js" defer></script>
-
 </head>
 
 <body>
@@ -40,27 +41,7 @@
 		</div>
 	</header>
 
-	<div class="loginBox">
-		<div class="loginFormContainer">
-			<form class="loginForm">
-				<div class="loginTitle">
-					<h1>Log-in</h1>
-				</div>
-				<div class="loginInput usernameLoginInput">
-					<input type="text" name="username" id="formUsername" placeholder="Username">
-					<p class="userNotFound"></p>
-				</div>
-				<div class="loginInput">
-					<input type="password" name="password" id="password" placeholder="Password">
-				</div>
-				<div class="loginButton">
-					<button type="submit" class="loginButton">Login</button>
-				</div>
-				<a href="signup.html">Sign-up</a>
-			</form>
-		</div>
-	</div>
-
+	<script src="scripts/redirectToMoviePage.js" defer></script>
 </body>
 
 </html>

@@ -2,22 +2,21 @@ const urlParams = new URLSearchParams(window.location.search); // Get the URL pa
 const contentID = urlParams.get('id');
 const contentType = urlParams.get('type')
 
-headers = {
-	"accept": "application/json",
-	"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYjIzNzkyOGRjYTE2MDYwNDkzN2E3MWY5NDdkNmM2MiIsInN1YiI6IjY1ZTMyNDhiNDk4ZWY5MDE2NGVjY2U4NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5gRke4f-AmvSdy_tRRB93Sd2TuxA3tOw_2NCRhlM3L4"
-}
 $(window).on('load', function () {
 	$(() => {
 		$.ajax({
 			url: `https://api.themoviedb.org/3/${contentType}/${contentID}?language=en-US`,
 			type: 'GET',
-			headers: headers,
+			headers: {
+				"accept": "application/json",
+				"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYjIzNzkyOGRjYTE2MDYwNDkzN2E3MWY5NDdkNmM2MiIsInN1YiI6IjY1ZTMyNDhiNDk4ZWY5MDE2NGVjY2U4NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5gRke4f-AmvSdy_tRRB93Sd2TuxA3tOw_2NCRhlM3L4"
+			},
 			success: (data) => {
 				const checkIfUserLoggedIn = localStorage.getItem('username');
 				if (checkIfUserLoggedIn !== null) {
 					chechIFfavs(data)
 				}
-				console.log(data);
+				//console.log(data);
 				let airTime = ''
 				if (contentType === 'tv') {
 					airTime = data.first_air_date.split('-')[0] + ' to ' + data.last_air_date.split('-')[0]
@@ -32,7 +31,7 @@ $(window).on('load', function () {
 				$('.moviePoster').attr('data-movie-id', data.id);
 				$('.contentStatus')[0].textContent = data.status;
 
-				console.log(data.status, $('.contentStatus'));
+				//console.log(data.status, $('.contentStatus'));
 				$('.movieDetails').append(
 					`<div class="contentType">${contentType.toUpperCase()}</div>
 					<h1 class="mainTitleMovie">${contentType == 'tv' ? data.name : data.title}</h1>
@@ -51,10 +50,22 @@ $(window).on('load', function () {
 				$.ajax({
 					type: 'GET',
 					url: `https://api.themoviedb.org/3/${contentType}/${contentID}/watch/providers?language=en-US`,
-					headers: headers,
+					headers: {
+						"accept": "application/json",
+						"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYjIzNzkyOGRjYTE2MDYwNDkzN2E3MWY5NDdkNmM2MiIsInN1YiI6IjY1ZTMyNDhiNDk4ZWY5MDE2NGVjY2U4NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5gRke4f-AmvSdy_tRRB93Sd2TuxA3tOw_2NCRhlM3L4"
+					},
 					success: (providers) => {
 						watchProvidersUS = providers.results;
-						console.log(watchProvidersUS);
+						let providersList = [];
+						for (let key in watchProvidersUS) {
+							if (watchProvidersUS.hasOwnProperty(key)) {
+								providersList.push([...watchProvidersUS[key].flatrate]);
+							}
+						}
+						// const providerLists = providersList.map((item) => {
+						// 	return [...item.flatrate]
+						// })
+						console.log(providersList);
 						tvORmovie = contentType === 'tv' ? watchProvidersUS.CA.flatrate || watchProvidersUS.AE.flatrate : watchProvidersUS.AE.flatrate || watchProvidersUS.US.buy;
 						const watch = tvORmovie.map((item) => {
 							return `<div class="providerBox">
@@ -62,7 +73,7 @@ $(window).on('load', function () {
 								<p class="providerName">${item.provider_name}</p>
 							</div>
 						`})
-						console.log(watch);
+						//console.log(watch);
 						$('.watchProvidersContainer').append(watch.join(''))
 					}
 				})
@@ -70,7 +81,10 @@ $(window).on('load', function () {
 				$.ajax({
 					type: 'GET',
 					url: `https://api.themoviedb.org/3/${contentType}/${contentID}/credits?language=en-US`,
-					headers: headers,
+					headers: {
+						"accept": "application/json",
+						"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYjIzNzkyOGRjYTE2MDYwNDkzN2E3MWY5NDdkNmM2MiIsInN1YiI6IjY1ZTMyNDhiNDk4ZWY5MDE2NGVjY2U4NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5gRke4f-AmvSdy_tRRB93Sd2TuxA3tOw_2NCRhlM3L4"
+					},
 					success: (actors) => {
 						actors = actors.cast;
 						//console.log(actors);
@@ -90,7 +104,10 @@ $(window).on('load', function () {
 				$.ajax({
 					type: 'GET',
 					url: `https://api.themoviedb.org/3/${contentType}/${contentID}/similar?language=en-US`,
-					headers: headers,
+					headers: {
+						"accept": "application/json",
+						"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYjIzNzkyOGRjYTE2MDYwNDkzN2E3MWY5NDdkNmM2MiIsInN1YiI6IjY1ZTMyNDhiNDk4ZWY5MDE2NGVjY2U4NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5gRke4f-AmvSdy_tRRB93Sd2TuxA3tOw_2NCRhlM3L4"
+					},
 					success: (similar) => {
 						similar = similar.results;
 						//console.log(similar);
@@ -166,7 +183,7 @@ addCommentBtn.addEventListener('click', (e) => {
 	})
 		.then((response) => response.json())
 		.then((data) => {
-			console.log(data);
+			//console.log(data);
 			if (data.message === 'success') {
 				$('#comment').val('');
 				console.log('Comment added successfully');
@@ -189,7 +206,7 @@ function getComments() {
 	})
 		.then((response) => response.json())
 		.then((data) => {
-			console.log(data);
+			$("#commentCount").text(`(${data.length})`)
 			const comments = data.map((comment) => {
 				return `
 				<div class="commentBox">

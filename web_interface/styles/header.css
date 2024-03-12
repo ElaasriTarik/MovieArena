@@ -1,6 +1,6 @@
 #page_logo {
-	max-width: 6rem;
-	max-height: 4rem;
+	max-width: 3.5rem;
+	max-height: auto;
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -22,6 +22,7 @@
 	right: 0;
 	margin-bottom: 2rem;
 	z-index: 1000;
+	padding: 0 1rem;
 }
 
 .list_titles {

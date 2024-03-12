@@ -1,8 +1,7 @@
 let addToFavsBtn = $('#addToFavsBtn')[0];
-console.log(addToFavsBtn);
 
 addToFavsBtn.addEventListener('click', (e) => {
-	console.log('clicked');
+	//console.log('clicked');
 	const movieId = document.querySelector('.moviePoster').dataset.movieId;
 	const moviePoster = document.querySelector('.movieImg').src;
 	const movieTitle = document.querySelector('.mainTitleMovie').textContent;

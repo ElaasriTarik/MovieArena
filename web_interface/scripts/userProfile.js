@@ -34,7 +34,7 @@ if (checkIfUserLoggedIn) {
 }
 
 function populateFavs(data) {
-	console.log(data);
+	//console.log(data);
 	const numberOfMovies = document.querySelector('.NumberOfMovies');
 	const NumberOfSeries = document.querySelector('.NumberOfSeries');
 	const moviesData = data[0].movies;

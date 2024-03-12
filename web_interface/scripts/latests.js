@@ -1,12 +1,13 @@
+const headers = {
+	"accept": "application/json",
+	"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYjIzNzkyOGRjYTE2MDYwNDkzN2E3MWY5NDdkNmM2MiIsInN1YiI6IjY1ZTMyNDhiNDk4ZWY5MDE2NGVjY2U4NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5gRke4f-AmvSdy_tRRB93Sd2TuxA3tOw_2NCRhlM3L4"
+
+}
 $(() => {
 	$.ajax({
 		url: "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
 		type: 'GET',
-		headers: {
-			"accept": "application/json",
-			"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYjIzNzkyOGRjYTE2MDYwNDkzN2E3MWY5NDdkNmM2MiIsInN1YiI6IjY1ZTMyNDhiNDk4ZWY5MDE2NGVjY2U4NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5gRke4f-AmvSdy_tRRB93Sd2TuxA3tOw_2NCRhlM3L4"
-
-		},
+		headers: headers,
 		success: (data) => {
 			latestMovies = data.results;
 			for (let i = 0; i < latestMovies.length; i++) {
@@ -27,14 +28,10 @@ $(() => {
 	$.ajax({
 		url: "https://api.themoviedb.org/3/trending/tv/week?language=en-US",
 		type: 'GET',
-		headers: {
-			"accept": "application/json",
-			"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYjIzNzkyOGRjYTE2MDYwNDkzN2E3MWY5NDdkNmM2MiIsInN1YiI6IjY1ZTMyNDhiNDk4ZWY5MDE2NGVjY2U4NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5gRke4f-AmvSdy_tRRB93Sd2TuxA3tOw_2NCRhlM3L4"
-
-		},
+		headers: headers,
 		success: (data) => {
 			latestShows = data.results;
-			console.log(latestShows);
+			//console.log(latestShows);
 			for (let i = 0; i < latestShows.length; i++) {
 				$('#latestShowsBody').append(`
 					<div class="movieCard" data-movie-id="${latestShows[i].id}" data-content="tv">
@@ -53,14 +50,10 @@ $(() => {
 	$.ajax({
 		url: "https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1",
 		type: 'GET',
-		headers: {
-			"accept": "application/json",
-			"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYjIzNzkyOGRjYTE2MDYwNDkzN2E3MWY5NDdkNmM2MiIsInN1YiI6IjY1ZTMyNDhiNDk4ZWY5MDE2NGVjY2U4NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5gRke4f-AmvSdy_tRRB93Sd2TuxA3tOw_2NCRhlM3L4"
-
-		},
+		headers: headers,
 		success: (data) => {
 			topRatedShows = data.results;
-			console.log(topRatedShows);
+			//console.log(topRatedShows);
 			for (let i = 0; i < topRatedShows.length; i++) {
 				$('#topRatedShowsBody').append(`
 					<div class="movieCard" data-movie-id="${topRatedShows[i].id}" data-content="tv">

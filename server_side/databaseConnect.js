@@ -3,7 +3,7 @@ const connection = mysql.createConnection({
 	host: 'moviearena.c94ckwwumw1x.us-east-1.rds.amazonaws.com',
 	user: 'tarek',
 	port: '3306',
-	password: 'tarek112233',
+	password: process.env.DB_PASSWORD,
 	database: 'my_db'
 });
 const express = require('express');
@@ -126,8 +126,8 @@ app.post('/addToFavs', (req, res) => {
 		}
 		userID = results[0].id;
 		const isMovieOrSerie = contentType === 'movie' ? 'movies' : 'series';
-		const getMovie = `SELECT * FROM ${isMovieOrSerie} WHERE id = ?;`;
-		connection.query(getMovie, [movieId], (error, results, fields) => {
+		const getMovie = `SELECT * FROM ${isMovieOrSerie} WHERE id = ? AND user_id = ?;`;
+		connection.query(getMovie, [movieId, userID], (error, results, fields) => {
 			if (error) {
 				console.error(error);
 				res.status(500).send({ message: 'Database error' });
@@ -208,11 +208,11 @@ app.get('/checkFav', (req, res) => {
 		}
 		userID = results[0].id;
 		if (userID) {
-			console.log('userID', userID);
+			//console.log('userID', userID);
 			const isMovieOrSerie = contentType === 'movie' ? 'movies' : 'series';
 			const getMovie = `SELECT * FROM ${isMovieOrSerie} WHERE id = ? AND user_id = ?;`;
 			connection.query(getMovie, [parseInt(movieId), parseInt(userID)], (error, results, fields) => {
-				console.log(results);
+				//console.log(results);
 				if (error) {
 					console.error(error);
 					res.status(500).send({ message: 'Database error' });
@@ -283,7 +283,7 @@ app.post('/addComment', (req, res) => {
 
 		const checkMovieExists = `SELECT * FROM ${isMovieOrSerie}s WHERE id = ? AND user_id = ?;`;
 		movieID = contentID;
-		console.log(contentID, movieID, userID, username,);
+		//console.log(contentID, movieID, userID, username,);
 		const insertComment = `INSERT INTO comments (movieID, userID, username, content, type, timestamp) VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP);`;
 		connection.query(insertComment, [movieID, userID, username, comment, isMovieOrSerie], (error, results, fields) => {
 			if (error) {
@@ -306,7 +306,7 @@ app.get('/getComments', (req, res) => {
 			res.status(500).send({ message: 'Database error' });
 			return;
 		}
-		console.log(results);
+		//console.log(results);
 		res.send(results);
 	});
 });
@@ -344,7 +344,7 @@ function checkUser(username) {
 	});
 }
 
-
+const port = process.env.PORT || 5000;
 
 app.listen(5500, () => {
 	console.log('Server is running on port 5500');
