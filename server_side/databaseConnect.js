@@ -13,7 +13,7 @@ const cors = require('cors');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({
-	origin: 'https://movie-arena-khaki.vercel.app/'
+	origin: 'https://movie-arena-khaki.vercel.app:5001'
 }));
 app.use(express.json());
 
