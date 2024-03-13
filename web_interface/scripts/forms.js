@@ -4,7 +4,7 @@ loginForm.addEventListener('submit', (e) => {
 	const username = document.querySelector('#formUsername').value;
 	const password = document.getElementById('password').value;
 	console.log(username, password);
-	fetch('http://localhost:5500/login', {
+	fetch('https://movie-arena-khaki.vercel.app/login', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'

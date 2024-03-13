@@ -13,7 +13,7 @@ const cors = require('cors');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({
-	origin: 'http://127.0.0.1:5501'
+	origin: 'https://movie-arena-khaki.vercel.app/'
 }));
 app.use(express.json());
 
