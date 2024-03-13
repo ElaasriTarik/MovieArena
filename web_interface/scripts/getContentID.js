@@ -206,6 +206,7 @@ function getComments() {
 	})
 		.then((response) => response.json())
 		.then((data) => {
+			console.log(data);
 			$("#commentCount").text(`(${data.length})`)
 			const comments = data.map((comment) => {
 				return `
@@ -216,7 +217,7 @@ function getComments() {
 				</div>
 				<div class="commentContent">
 					<div class="userAndDate">
-						<p class="username">${comment.username}</p>
+						<p class="username" data-id="${comment.userID}">${comment.username}</p>
 						<p class="dateCommented">${comment.timestamp.split('T')[0]}</p>
 					</div>
 					<p class="comment">${comment.content}</p>
@@ -224,8 +225,21 @@ function getComments() {
 			</div>
 			`
 			})
-			console.log(comments);
+			//console.log(comments);
 			$('.comments').empty();
 			$('.comments').append(comments.join(''))
+			makeUsersActive();
 		});
+
+}
+
+function makeUsersActive() {
+	const userBoxes = $('.username').toArray();
+	userBoxes.forEach(box => {
+		box.addEventListener('click', (event) => {
+			console.log('clicked');
+			const userID = event.currentTarget.dataset.id;
+			window.location.href = `user.html?userID=${userID}`;
+		});
+	});
 }

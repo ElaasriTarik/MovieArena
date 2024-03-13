@@ -1,0 +1,32 @@
+.userProfile {
+	width: 20rem;
+}
+
+.followersSection {
+	display: flex;
+	gap: .2rem;
+	align-items: center;
+	justify-content: center;
+	margin-top: 1rem;
+	width: fit-content;
+}
+
+h5 {
+	font-weight: 600;
+	font-size: .8rem;
+}
+
+.followButton {
+	padding: 4px 10px;
+	background-color: lightblue;
+	font-size: 16px;
+	border: 0;
+	border-radius: 4px;
+	color: rgb(67, 63, 67);
+	cursor: pointer;
+}
+
+.followButton:hover {
+	background-color: #86bcbc;
+	color: white;
+}

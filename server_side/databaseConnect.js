@@ -67,9 +67,9 @@ app.post('/signup', (req, res) => {
 			});
 		}
 	});
-	getAllUsers((users) => {
-		console.log(users);
-	})
+	// getAllUsers((users) => {
+	// 	console.log(users);
+	// })
 })
 
 
@@ -311,6 +311,98 @@ app.get('/getComments', (req, res) => {
 	});
 });
 
+// get user data
+app.get('/getUser', (req, res) => {
+	const { id } = req.query;
+	const getUserId = `SELECT * FROM users WHERE id = ?;`;
+	connection.query(getUserId, [id], (error, results, fields) => {
+		if (error) {
+			console.error(error);
+			res.status(500).send({ message: 'Database error' });
+			return;
+		}
+		if (results.length > 0) {
+			const userdata = [{ 'username': results[0].username, 'fullname': results[0].fullname, 'id': results[0].id }];
+			res.send(userdata);
+		} else {
+			res.status(404).send({ message: 'User not found' });
+		}
+	});
+})
+// follow user
+app.post('/followUser', (req, res) => {
+	const { toFollow, follower } = req.body;
+	const getFollowerId = `SELECT * FROM users WHERE username = ?;`;
+	connection.query(getFollowerId, [follower], (error, results, fields) => {
+		if (error) {
+			console.error(error);
+			res.status(500).send({ message: 'Database error' });
+			return;
+		}
+		const toFollowId = results[0].id;
+		const insertToRelationships = `INSERT INTO relationships (followerID, followingID) VALUES (?, ?);`;
+		connection.query(insertToRelationships, [toFollowId, toFollow], (error, results, fields) => {
+			if (error) {
+				console.error(error);
+				res.status(500).send({ message: 'Database error' });
+				return;
+			}
+			res.send({ message: 'success' });
+		});
+	})
+})
+// check if following current user
+app.get('/checkIfFollowing', (req, res) => {
+	const { userId, follower } = req.query;
+	const getFollowerId = `SELECT * FROM users WHERE username = ?;`;
+	connection.query(getFollowerId, [follower], (error, results, fields) => {
+		if (error) {
+			console.error(error);
+			res.status(500).send({ message: 'Database error' });
+			return;
+		}
+		const followerID = results[0].id;
+		const checkIfFollowing = `SELECT * FROM relationships WHERE followerID = ? AND followingID = ?;`;
+		connection.query(checkIfFollowing, [followerID, userId], (error, results, fields) => {
+			if (error) {
+				console.error(error);
+				res.status(500).send({ message: 'Database error' });
+				return;
+			}
+			if (results.length > 0) {
+				res.send({ message: 'success' });
+			} else {
+				res.send({ message: 'fail' });
+			}
+		});
+	})
+})
+// get followCount
+app.get('/getFollowCount', (req, res) => {
+	const { userId } = req.query;
+	const getFollowCount = `SELECT * FROM relationships WHERE followerID = ?;`;
+	let userdata = {};
+	connection.query(getFollowCount, [userId], (error, results, fields) => {
+		if (error) {
+			console.error(error);
+			res.status(500).send({ message: 'Database error' });
+			return;
+		}
+		userdata.followers = results.length;
+		const getFollowingCount = `SELECT * FROM relationships WHERE followingID = ?;`;
+		connection.query(getFollowingCount, [userId], (error, results, fields) => {
+			if (error) {
+				console.error(error);
+				res.status(500).send({ message: 'Database error' });
+				return;
+			}
+			userdata.following = results.length;
+
+			res.send(userdata);
+		});
+	});
+});
+
 
 function getAllMovies(userID) {
 	//console.log('getting movies', userID);
@@ -322,8 +414,8 @@ function getAllMovies(userID) {
 		}
 		console.log(results);
 	});
-
 }
+
 
 // function to check if user exists
 function checkUser(username) {

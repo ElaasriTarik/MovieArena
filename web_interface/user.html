@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Your profile</title>
+	<link rel="stylesheet" href="styles/home.css">
+	<link rel="stylesheet" href="styles/header.css">
+	<link rel="stylesheet" href="styles/userProfile.css">
+	<link rel="stylesheet" href="styles/user.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="scripts/home.js"></script>
+
+	<script src="scripts/logout.js" defer></script>
+
+</head>
+
+<body>
+
+	<header id="header">
+		<div id="page_logo">
+			<a href="home.html">
+				<img src="images//movieArena_logo.png" alt="" srcset="" class="page_logo">
+			</a>
+		</div>
+
+		<ul class="list_titles">
+			<li><a href="home.html">Home</a></li>
+			<li><a href="#">About</a></li>
+			<li><a href="#">Help</a></li>
+		</ul>
+		<div id="user_box">
+			<div id="user_name">
+				<p><a href="userProfile.html" id="username">John Doe</a></p>
+			</div>
+			<div id="user_image">
+				<img src="images/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+					class="user_image">
+			</div>
+		</div>
+	</header>
+
+	<div class="userContainer">
+		<div class="userProfile">
+			<div class="userImageConatainer">
+				<img src="images/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+					class="userImage">
+			</div>
+			<div class="userDetails">
+				<div class="userFullName">
+					<p class="profileFullname">John Doe</p>
+				</div>
+				<div class="userUsername">
+					<p class="profileUsername">john_doe</p>
+				</div>
+				<div class="followersSection">
+					<h5 class="followers">Followers: 0</h5>
+					<h5 class="followings">Following: 0</h5>
+				</div>
+				<div class="followingSection">
+					<button class="followButton">Follow</button>
+				</div>
+			</div>
+		</div>
+		<div class="aboutUser">
+			<div class="moviesLiked likedMS">
+				<div class="LikedAndCount">
+					<h2>Movies liked</h2>
+					<h4 class="NumberOfMovies">0</h4>
+				</div>
+				<div id="mainContent">
+					<div id="mainContentBody">
+					</div>
+				</div>
+			</div>
+			<div class="SeriesLiked likedMS">
+				<div class="LikedAndCount">
+					<h2>Series liked</h2>
+					<h4 class="NumberOfSeries">0</h4>
+				</div>
+				<div id="mainContent">
+					<div id="mainContentBodySeries">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="scripts/user.js"></script>
+</body>
+
+</html>
