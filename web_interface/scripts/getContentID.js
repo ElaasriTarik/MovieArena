@@ -169,6 +169,13 @@ addCommentBtn.addEventListener('click', (e) => {
 		return;
 	}
 	const comment = document.querySelector('#comment').value;
+	if (comment === '') {
+		$('#comment').css('border', '2px solid red');
+		setTimeout(() => {
+			$('#comment').css('border', '1px solid #e1dcd5');
+		}, 3000);
+		return;
+	}
 	fetch('http://localhost:5500/addComment', {
 		method: 'POST',
 		headers: {

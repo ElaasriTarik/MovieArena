@@ -1,10 +1,10 @@
 const loginForm = document.querySelector('.loginForm');
 loginForm.addEventListener('submit', (e) => {
 	e.preventDefault();
-	const username = document.querySelector('#formUsername').value;
+	const username = document.getElementById('formUsername').value;
 	const password = document.getElementById('password').value;
 	console.log(username, password);
-	fetch('https://movie-arena-khaki.vercel.app:5001/login', {
+	fetch('http://localhost:5500/login', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -28,7 +28,7 @@ loginForm.addEventListener('submit', (e) => {
 				// username_on_page.textContent = data[0].username;
 				localStorage.setItem('username', username);
 				localStorage.setItem('fullname', data[0].fullname);
-				window.location.href = '/web_interface/home.html';
+				window.location.href = '/web_interface/index.html';
 			}
 		});
 })
