@@ -13,6 +13,33 @@ $(() => {
 			for (let i = 0; i < latestMovies.length; i++) {
 				$('#mainContentBody').append(`
 					<div class="movieCard" data-movie-id="${latestMovies[i].id}" data-content="movie">
+					<div class="addToFavIconContainer" data-movie-id="${latestMovies[i].id}" data-content="movie">
+					<img src="images/icons8-favorites-100.png" alt="Add to Favourites" class="addToFavIcon">
+					</div>
+							<div class="movieImage">
+							<div class="ratingContainerBody">
+									<img src="images/star.png" alt="Rating" class="ratingIconBody">
+									<p class="rating">${latestMovies[i].vote_average.toFixed(1)}</p>
+								</div>
+								<img src="https://image.tmdb.org/t/p/w500${latestMovies[i].poster_path}" alt="Movie Poster" class="moviePoster">
+							</div>
+					</div>`);
+			}
+		},
+	});
+	// get top rated movies
+	$.ajax({
+		url: "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+		type: 'GET',
+		headers: headers,
+		success: (data) => {
+			latestMovies = data.results;
+			for (let i = 0; i < latestMovies.length; i++) {
+				$('#topRatedMoviesBody').append(`
+					<div class="movieCard" data-movie-id="${latestMovies[i].id}" data-content="movie">
+					<div class="addToFavIconContainer" data-movie-id="${latestMovies[i].id}" data-content="movie">
+					<img src="images/icons8-favorites-100.png" alt="Add to Favourites" class="addToFavIcon">
+					</div>
 							<div class="movieImage">
 							<div class="ratingContainerBody">
 									<img src="images/star.png" alt="Rating" class="ratingIconBody">

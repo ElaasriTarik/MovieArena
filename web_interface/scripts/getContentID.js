@@ -4,6 +4,7 @@ const contentType = urlParams.get('type')
 
 $(window).on('load', function () {
 	$(() => {
+
 		$.ajax({
 			url: `https://api.themoviedb.org/3/${contentType}/${contentID}?language=en-US`,
 			type: 'GET',
@@ -42,9 +43,88 @@ $(window).on('load', function () {
 					<h4 class="mainMovieRating"><span class="ratingNumber">${data.vote_average.toFixed(1)}</span> <span class="votesCount">(${data.vote_count} votes)</span></h4>
 
 					</div>
+					<div class="addRatingBox">
+					<div class="addRatingImage">
+					
+					<img src="images/rateIcon.png" alt="Rating" class="rateIcon" data-movie-id=${data.id}>
+					<p class="rating"></p>
+					</div>
+						
+						<p class="addRatingLabel">Rate</p>
+					</div>
 					<h4 class="genres"><bold>Genres: </bold>${gg.join(' ')}
 					</h4>`
+
 				);
+				// trigger the rate Icon option
+				$('.addRatingImage').on('click', (e) => {
+					const addRatingBox = $('body');
+
+					if (e.currentTarget.dataset.status === 'true') {
+						return;
+					} else {
+						e.currentTarget.dataset.status = 'true';
+						const dialogueSection = document.createElement('dialogue');
+						dialogueSection.className = 'dialogueSection';
+						dialogueSection.innerHTML = `
+							<h4 class="rateLabel">Rate This</h4>
+							<h2 class="rateTitle">${contentType == 'tv' ? data.name : data.title}</h2>
+							<div class="starsContainer">
+								<img src="images/rateIcon.png" alt="Rating" class="rateStarIcon" data-star-id="1" />
+								<img src="images/rateIcon.png" alt="Rating" class="rateStarIcon" data-star-id="2" />
+								<img src="images/rateIcon.png" alt="Rating" class="rateStarIcon" data-star-id="3" />
+								<img src="images/rateIcon.png" alt="Rating" class="rateStarIcon" data-star-id="4" />
+								<img src="images/rateIcon.png" alt="Rating" class="rateStarIcon" data-star-id="5" />
+								<img src="images/rateIcon.png" alt="Rating" class="rateStarIcon" data-star-id="6" />
+								<img src="images/rateIcon.png" alt="Rating" class="rateStarIcon" data-star-id="7" />
+								<img src="images/rateIcon.png" alt="Rating" class="rateStarIcon" data-star-id="8" />
+								<img src="images/rateIcon.png" alt="Rating" class="rateStarIcon" data-star-id="9" />
+								<img src="images/rateIcon.png" alt="Rating" class="rateStarIcon" data-star-id="10" />
+							</div>
+							<button class="rateBtn">Rate</button>
+						`;
+						addRatingBox.append(dialogueSection);
+						const allStars = $('.rateStarIcon').toArray();
+						console.log(allStars);
+						rate(dialogueSection);
+						// when cursor is away
+						//$('.starsContainer').on('mouseleave', (e) => {
+						//})
+						allStars.forEach((star) => {
+							//handleMouseLeave(star)
+							star.addEventListener('mouseover', (e) => {
+								allStars.forEach((star) => {
+
+									star.src = 'images/rateIcon.png';
+									star.dataset.status = 'false';
+								})
+								star.addEventListener('click', (e) => {
+									const starID = e.currentTarget.dataset.starId;
+									for (let i = 0; i < parseInt(starID); i++) {
+										const prevStar = $('.rateStarIcon')[i];
+										prevStar.dataset.status = 'true';
+										prevStar.src = 'images/colored-star.png';
+									}
+
+								})
+								//console.log('clicked');
+								const starID = e.currentTarget.dataset.starId;
+								for (let i = parseInt(starID); i > 0; i--) {
+									if (i < 1) {
+										return;
+									}
+									const prevStar = $('.rateStarIcon')[i - 1];
+									prevStar.dataset.status = 'true';
+									prevStar.src = 'images/colored-star.png';
+
+								}
+							})
+
+						})
+
+					}
+
+				});
 
 				// get the watch providers list
 				$.ajax({
@@ -122,6 +202,8 @@ $(window).on('load', function () {
 						`
 						})
 						$('.similarMovies').append(similarList.join(''))
+
+						getRating();
 						makeCardActive();
 						getComments();
 					}
@@ -231,10 +313,10 @@ function getComments() {
 				</div>
 			</div>
 			`
-			})
+			});
 			//console.log(comments);
 			$('.comments').empty();
-			$('.comments').append(comments.join(''))
+			$('.comments').append(comments.reverse().join(''))
 			makeUsersActive();
 		});
 
@@ -249,4 +331,58 @@ function makeUsersActive() {
 			window.location.href = `user.html?userID=${userID}`;
 		});
 	});
+}
+
+// rate button
+function rate(dialogueSection) {
+	const rateBtn = $('.rateBtn')[0];
+	rateBtn.addEventListener('click', (e) => {
+		const allStars = $('.rateStarIcon').toArray();
+		let rating = 0;
+		allStars.forEach((star) => {
+			if (star.dataset.status === 'true') {
+				rating = parseInt(star.dataset.starId);
+			}
+		});
+		fetch('http://localhost:5500/addRating', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				contentType: contentType,
+				contentID: contentID,
+				username: localStorage.getItem('username'),
+				rating: rating
+			})
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				//console.log(data);
+				if (data.message === 'success') {
+					dialogueSection.style.display = 'none';
+					$('.rateIcon').attr('src', 'images/colored-star.png');
+
+					console.log('Rating added successfully');
+					getRating();
+				}
+			});
+	});
+}
+
+// get the rating
+function getRating() {
+	fetch(`http://localhost:5500/getRating?username=${localStorage.getItem('username')}&contentType=${contentType}&contentID=${contentID}`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			console.log(data);
+			const rating = data[0].rating;
+			$('.rateIcon').attr('src', 'images/colored-star.png');
+			$('.rating').text(`${rating}`);
+		});
 }

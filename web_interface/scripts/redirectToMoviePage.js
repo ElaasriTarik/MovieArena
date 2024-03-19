@@ -2,25 +2,55 @@
 
 $(window).on('load', function () {
 	$(function () {
-		let moviesCards = document.querySelectorAll('.movieCard');
+		const moviesCards = document.querySelectorAll('.movieCard');
+		const favsBtns = document.querySelectorAll('.addToFavIconContainer');
+		console.log(favsBtns);
 		makeActive(moviesCards);
-		//let searchContent;
-		//const searchResults = document.getElementById('searchResults');
-		// searchResults.addEventListener('onchange', () => {
-		// 	makeActive()
-		// })
-
-		console.log(moviesCards);
+		favBtns(favsBtns);
+		//console.log(moviesCards);
 
 	});
 });
 function makeActive(cc) {
 	cc.forEach((card) => {
 		card.addEventListener('click', (event) => {
-			console.log('clicked');
+			//console.log('clicked');
 			const contentID = event.currentTarget.dataset.movieId;
 			const contentType = event.currentTarget.dataset.content;
 			window.location.href = `movie.html?type=${contentType}&id=${contentID}`;
+		});
+	});
+}
+function favBtns(favs) {
+	favs.forEach((btn) => {
+		btn.addEventListener('click', (event) => {
+			console.log('clicked');
+			const contentID = event.currentTarget.dataset.movieId;
+			const contentType = event.currentTarget.dataset.content;
+			const username = localStorage.getItem('username');
+			if (username === null) {
+				alert('You need to be logged in to add to favourites');
+				return;
+			}
+			fetch('http://localhost:5500/addFav', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					contentType: contentType,
+					contentID: contentID,
+					username: username
+				})
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					//console.log(data);
+					if (data.message === 'success') {
+						console.log('Favourite added successfully');
+						//alert('Favourite added successfully');
+					}
+				});
 		});
 	});
 }

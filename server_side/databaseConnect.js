@@ -403,6 +403,53 @@ app.get('/getFollowCount', (req, res) => {
 	});
 });
 
+// add rating
+app.post('/addRating', (req, res) => {
+	const { contentType, contentID, username, rating } = req.body;
+	const getUserID = `SELECT * FROM users where username = ?`;
+	connection.query(getUserID, [username], (error, results, fields) => {
+		if (error) {
+			console.log(error)
+			res.status(500).send({ message: 'Database error' })
+			return;
+		}
+		const userID = results[0].id;
+		const dbType = contentType == 'tv' ? 'ratingsTV' : 'ratings';
+		const colName = contentType == 'tv' ? 'tvID' : 'movieID';
+		const addRatingQuery = `INSERT INTO ${dbType} (userID, rating, ${colName}) values (?, ?, ?)`;
+		connection.query(addRatingQuery, [userID, rating, contentID], (error, results, fields) => {
+			if (error) {
+				console.log(error)
+				res.status(500).send({ message: 'Database error' })
+				return;
+			}
+			res.send({ message: 'success' });
+		})
+	})
+})
+app.get('/getRating', (req, res) => {
+	const { contentType, contentID, username } = req.query;
+	const getUserID = `SELECT * FROM users where username = ?`;
+	connection.query(getUserID, [username], (error, results, fields) => {
+		if (error) {
+			console.log(error)
+			res.status(500).send({ message: 'Database error' })
+			return;
+		}
+		const userID = results[0].id;
+		const dbType = contentType == 'tv' ? 'ratingsTV' : 'ratings';
+		const colName = contentType == 'tv' ? 'tvID' : 'movieID';
+		const getRatingQuery = `SELECT * FROM ${dbType} WHERE userID = ? AND ${colName} = ?`;
+		connection.query(getRatingQuery, [userID, contentID], (error, results, fields) => {
+			if (error) {
+				console.log(error)
+				res.status(500).send({ message: 'Database error' })
+				return;
+			}
+			res.send(results);
+		})
+	})
+})
 
 function getAllMovies(userID) {
 	//console.log('getting movies', userID);

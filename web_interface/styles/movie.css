@@ -410,14 +410,13 @@
 .commentBox {
 	width: 100%;
 	min-height: 3rem;
-	height: 6rem;
 	display: flex;
 	align-items: flex-start;
 	justify-content: flex-start;
 	padding: .5rem;
 	position: relative;
 	overflow: hidden;
-	margin-bottom: -1.7rem;
+	margin-bottom: -1.8rem;
 }
 
 .commentUser {
@@ -538,4 +537,107 @@
 .userAndDate .username {
 	font-size: 1rem;
 	font-weight: bold;
+}
+
+.addRatingBox {
+	display: flex;
+	max-height: 4rem;
+	align-items: center;
+	gap: .5rem;
+}
+
+.addRatingBox .rateIcon {
+	width: 2rem;
+	height: auto;
+}
+
+.addRatingBox .addRatingLabel {
+	font-size: 1.4rem;
+	color: #4c4a4a;
+	font-weight: 800;
+	padding-top: 10px;
+}
+
+.dialogueSection {
+	width: 30rem;
+	height: 15rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background-color: #e1d0b1;
+	border-radius: 6px;
+	color: #fff;
+	font-size: 1rem;
+	font-weight: 700;
+	border: none;
+	position: absolute;
+	top: 25%;
+	margin: auto;
+	left: calc(50% - 15rem);
+	z-index: 1000;
+	gap: .6rem;
+	border: 2px solid #191918;
+	box-shadow: 0rem 0rem 10rem 1rem #1e1e1d;
+}
+
+.rateLabel {
+	margin-bottom: -.3rem;
+	color: #2f2b2b;
+	text-transform: uppercase;
+	font-size: 12px;
+	font-weight: 800;
+}
+
+.rateBtn {
+	padding: 4px 10px;
+	background-color: #53c1f1;
+	border: none;
+	border-radius: 4px;
+	font-size: 19px;
+	color: #fff;
+	cursor: pointer;
+}
+
+.rateStarIcon {
+	width: 2rem;
+	height: auto;
+}
+
+.rateTitle {
+	font-size: 1.6rem;
+	color: #4c4a4a;
+	font-weight: 800;
+
+}
+
+.starsContainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.3rem;
+}
+
+.addRatingImage {
+	position: relative;
+	display: flex;
+	gap: .6rem;
+	align-items: center;
+	height: 2.2rem;
+	border-radius: 4px;
+	padding: 3px 4px;
+
+}
+
+.rating {
+	font-size: 1.2rem;
+	background-color: #f2e5ce;
+	color: #3c3838;
+	padding: 2px 7px;
+	margin-right: .3rem;
+}
+
+.addRatingImage:hover {
+	opacity: .9;
+	background-color: #f4f0ea;
 }

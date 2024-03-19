@@ -6,7 +6,8 @@
 
 #mainContent,
 #latestShows,
-#topRatedShows {
+#topRatedShows,
+#topRatedMovies {
 	display: flex;
 	flex-direction: column;
 	width: 95%;
@@ -16,13 +17,15 @@
 }
 
 #latestShows,
-#topRatedShows {
+#topRatedShows,
+#topRatedMovies {
 	margin-top: 1.5rem;
 }
 
 #mainContent h1,
 #latestShows h1,
-#topRatedShows h1 {
+#topRatedShows h1,
+#topRatedMovies h1 {
 	font-size: 1.7rem;
 	font-weight: 700;
 	color: #262626;
@@ -30,9 +33,10 @@
 	width: 100%;
 }
 
-#mainContent #mainContentBody,
+#mainContentBody,
 #latestShowsBody,
-#topRatedShowsBody {
+#topRatedShowsBody,
+#topRatedMoviesBody {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -45,12 +49,15 @@
 
 #mainContent #mainContentBody .movieCard,
 #latestShowsBody .movieCard,
-#topRatedShowsBody .movieCard {
+#topRatedShowsBody .movieCard,
+#topRatedMoviesBody .movieCard {
 	width: 9rem;
 	min-width: 9rem;
 	height: 100%;
 	background-color: #fff;
 	position: relative;
+	z-index: 1;
+	cursor: pointer;
 }
 
 .movieImage {
@@ -92,4 +99,44 @@
 .movieImage img {
 	width: 100%;
 	height: 100%;
+}
+
+.movieCard:hover .addToFavIcon {
+	display: block;
+	animation: backwards .2s ease-in fadeIn;
+}
+
+.movieCard:hover .movieImage .moviePoster {
+	filter: blur(.5px) brightness(.8) grayscale(.5) contrast(1.2) opacity(.8) drop-shadow(0 0 0 #fff);
+
+}
+
+.addToFavIconContainer {
+	z-index: 1000;
+}
+
+.addToFavIcon {
+	position: absolute;
+	top: -2px;
+	z-index: 1000;
+	right: .1rem;
+	display: none;
+	box-shadow: 0 0 0 0 #fff;
+	width: 2.8rem;
+	cursor: pointer;
+	height: auto;
+}
+
+
+
+@keyframes fadeIn {
+	0% {
+		top: -100%;
+		opacity: 0;
+	}
+
+	100% {
+		top: 2px;
+		opacity: 1;
+	}
 }
