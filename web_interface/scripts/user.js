@@ -4,7 +4,7 @@ const localFullname = localStorage.getItem('fullname');
 const localUsername = localStorage.getItem('username');
 if (!localFullname && !localUsername) {
 	usernameDisplay.textContent = 'Login';
-	usernameDisplay.href = '/web_interface/login.html';
+	usernameDisplay.href = 'login.html';
 }
 else {
 	usernameDisplay.textContent = localFullname;

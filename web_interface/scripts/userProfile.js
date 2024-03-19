@@ -3,7 +3,7 @@ const localFullname = localStorage.getItem('fullname');
 const localUsername = localStorage.getItem('username');
 if (!localFullname && !localUsername) {
 	usernameDisplay.textContent = 'Login';
-	usernameDisplay.href = 'login.html';
+	usernameDisplay.href = '/web_interface/login.html';
 }
 else {
 	usernameDisplay.textContent = localFullname;
@@ -32,13 +32,30 @@ if (checkIfUserLoggedIn) {
 		.then((data) => { populateFavs(data); })
 		.catch(error => console.log(error));
 }
+// get follow count
+fetch(`http://localhost:5500/getFollowCount?userId=${localStorage.getItem('id')}`, {
+	method: 'GET',
+	headers: {
+		'Content-Type': 'application/json'
+	}
+})
+	.then((response) => response.json())
+	.then((data) => {
+		const followers = document.querySelector('.followers');
+		const following = document.querySelector('.followings');
+		followers.textContent = 'Followers: ' + data.following;
+		following.textContent = 'Following: ' + data.followers;
+	})
+	.catch(error => console.log(error));
 
 function populateFavs(data) {
 	//console.log(data);
 	const numberOfMovies = document.querySelector('.NumberOfMovies');
 	const NumberOfSeries = document.querySelector('.NumberOfSeries');
-	const moviesData = data[0].movies;
+	const moviesData = data[0].movies
+	moviesData.reverse();
 	const seriesData = data[1].series;
+	seriesData.reverse();
 	numberOfMovies.textContent = moviesData.length;
 	NumberOfSeries.textContent = seriesData.length;
 	for (let i = 0; i < moviesData.length; i++) {

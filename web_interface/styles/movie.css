@@ -632,12 +632,134 @@
 .rating {
 	font-size: 1.2rem;
 	background-color: #f2e5ce;
-	color: #3c3838;
+	color: #514532;
 	padding: 2px 7px;
 	margin-right: .3rem;
+	height: 2.1rem;
+	display: flex;
+	align-items: center;
+	font-weight: bold;
+	border-radius: 6px;
 }
 
 .addRatingImage:hover {
 	opacity: .9;
 	background-color: #f4f0ea;
+}
+
+@media (max-width: 768px) {
+	#movieInfo {
+		flex-direction: column;
+		height: auto;
+	}
+
+	.movieDetails {
+		width: 100%;
+		max-width: 100%;
+		margin-top: 1rem;
+	}
+
+	.watchProviders {
+		width: 100%;
+		max-width: 100%;
+		margin-top: 1rem;
+	}
+
+	.actorsContainer {
+		width: 100%;
+		max-width: 100%;
+		margin-top: 1rem;
+	}
+
+	.similarMoviesContainer {
+		width: 100%;
+		max-width: 100%;
+		margin-top: 1rem;
+	}
+
+	.commentsSection {
+		width: 100%;
+		max-width: 100%;
+		margin-top: 1rem;
+	}
+
+	.dialogueSection {
+		width: 90%;
+		height: 15rem;
+		left: 5%;
+	}
+
+	.addRatingBox {
+		width: 100%;
+		max-width: 100%;
+		margin-top: 1rem;
+	}
+
+	.addRatingImage {
+		width: 100%;
+		max-width: 100%;
+		margin-top: 1rem;
+	}
+
+	.rateBtn {
+		width: 100%;
+		max-width: 100%;
+		margin-top: 1rem;
+	}
+
+	.rateStarIcon {
+		width: 1.5rem;
+	}
+
+	.rateTitle {
+		font-size: 1.3rem;
+	}
+
+	.starsContainer {
+		width: 100%;
+		max-width: 100%;
+		margin-top: 1rem;
+	}
+
+	.addComment textarea {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	#addCommentBtn {
+		width: 100%;
+		max-width: 100%;
+		margin-top: 1rem;
+	}
+
+	.userAndDate {
+		width: 100%;
+		max-width: 100%;
+		margin-top: 1rem;
+	}
+
+	.commentBox>div {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.commentContent {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.comments {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.actorsContainer .actors {
+		overflow: scroll;
+	}
+
+	.similarMoviesContainer .similarMovies {
+		overflow: scroll;
+	}
+
+	.commentsSection .comments {}
 }

@@ -28,6 +28,7 @@ loginForm.addEventListener('submit', (e) => {
 				// username_on_page.textContent = data[0].username;
 				localStorage.setItem('username', username);
 				localStorage.setItem('fullname', data[0].fullname);
+				localStorage.setItem('id', data[0].id);
 				window.location.href = '/web_interface/index.html';
 			}
 		});

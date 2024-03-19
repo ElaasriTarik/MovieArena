@@ -143,3 +143,13 @@
 	width: 105%;
 	height: 110%;
 }
+
+@media (max-width: 768px) {
+	#searchArea {
+		width: 90vw;
+		min-width: 80vw;
+		max-width: 90vw;
+		margin-top: 7.5rem;
+	}
+
+}

@@ -44,8 +44,8 @@ app.post('/login', (req, res) => {
 			}
 			//res.send(results);
 		} else {
-
-			res.send({ message: 'User not found', result: results });
+			const modifiedResults = { username: results[0].username, fullname: results[0].fullname, id: results[0].id };
+			res.send({ message: 'User not found', result: modifiedResults });
 		}
 	});
 })
@@ -58,12 +58,18 @@ app.post('/signup', (req, res) => {
 	connection.query(getUser, [username], (error, results, fields) => {
 		if (error) throw error;
 		if (results.length > 0) {
-			res.send({ message: 'User already exists' });
+			res.send({ message: 'User already exists', status: 'fail' });
 		} else {
 			const insertUser = `INSERT INTO users (fullname, username, password) VALUES (?, ?, ?);`;
 			connection.query(insertUser, [fullname, username, password], (error, results, fields) => {
 				if (error) throw error;
-				res.send({ message: 'User created', username: username, status: 'success' });
+				const getUserID = `SELECT * FROM users WHERE username = ?;`;
+				connection.query(getUserID, [username], (error, results, fields) => {
+					if (error) throw error;
+					const userID = results[0].id;
+					res.send({ message: 'User created', id: userID, username: username, status: 'success' });
+				});
+				//res.send({ message: 'User created', username: username, status: 'success' });
 			});
 		}
 	});

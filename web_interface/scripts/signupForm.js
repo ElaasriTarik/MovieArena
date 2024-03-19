@@ -29,7 +29,8 @@ signupForm.addEventListener('submit', (e) => {
 				// storing some info in localstorage
 				localStorage.setItem('username', username);
 				localStorage.setItem('fullname', fullname);
-				window.location.href = '/web_interface/login.html';
+				localStorage.setItem('id', data.id);
+				window.location.href = '/web_interface/index.html';
 			}
 		});
 });
