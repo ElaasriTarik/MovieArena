@@ -82,7 +82,7 @@
 
 }
 
-@media (max-width: 400px) {
+@media (max-width: 440px) {
 	#header {
 		padding: 0 .5rem;
 	}
@@ -99,5 +99,13 @@
 
 	#user_name a {
 		font-size: .8rem;
+	}
+
+	.list_titles {
+		display: none;
+	}
+
+	#header {
+		justify-content: space-around;
 	}
 }

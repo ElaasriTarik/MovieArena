@@ -692,11 +692,13 @@
 	.addRatingBox {
 		width: 100%;
 		max-width: 100%;
-		margin-top: 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
 	}
 
 	.addRatingImage {
-		width: 100%;
+		width: max-content;
 		max-width: 100%;
 		margin-top: 1rem;
 	}

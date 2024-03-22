@@ -7,10 +7,22 @@ $(function () {
 
 	// Get the search input
 	const searchInput = $('#searchText');
+	const dropDownBox = $('#dropDownBox');
 	searchInput.on('input', (e) => {
 		$('#searchResults').css('display', 'block');
-		startSearch('movie', e.target.value);
-		startSearch('tv', e.target.value);
+		$('#options').css('display', 'none');
+		const thisOption = $('#thisOption')[0];
+		console.log(thisOption.textContent);
+		if (thisOption.textContent === 'Movies') {
+			console.log('--> movies');
+			startSearch('movie', e.target.value, 'movie');
+		} else if (thisOption.textContent === 'Shows') {
+			startSearch('tv', e.target.value, 'tv');
+		} else {
+			startSearch('movie', e.target.value);
+			startSearch('tv', e.target.value);
+		}
+
 		$(document).click(function (event) {
 			const searchResults = $('#searchResults');
 			if (!searchResults.is(event.target) && searchResults.has(event.target).length === 0) {
@@ -18,13 +30,24 @@ $(function () {
 			}
 		});
 	});
+	// add event listener to drop down button
+	dropDownBox.on('click', (e) => {
+		$('#options').css('display', 'flex');
+		const optionsList = $('.option').toArray();
+		optionsList.forEach((item) => {
+			item.addEventListener('click', (e) => {
+				$('#thisOption').text(e.currentTarget.textContent);
+			})
+		})
+
+	});
 });
 
 let moviesRes = []
 let seriesRes = []
 let resultsMovies;
 let resultsSeries;
-function startSearch(contentType, query) {
+function startSearch(contentType, query, rule) {
 	$.ajax({
 		type: 'GET',
 		url: `https://api.themoviedb.org/3/search/${contentType}?query=${query}&language=en-US&page=1`,
@@ -37,27 +60,44 @@ function startSearch(contentType, query) {
 				resultsMovies = moviesRes.map(item => {
 					item.type = 'movie'
 					return item
-				}).sort((a, b) => a.vote_avergae - b.vote_avergae);
+				})//.sort((a, b) => a.vote_avergae - b.vote_avergae);
 				//console.log(resultsMovies);
 			} else {
 				seriesRes = movies;
 				resultsSeries = seriesRes.map((item) => {
 					item.type = 'tv'
 					return item
-				}).sort((a, b) => a.vote_avergae - b.vote_avergae);
+				})//.sort((a, b) => a.vote_avergae - b.vote_avergae);
 			}
-			if (resultsMovies.length > 0 && resultsSeries.length > 0) {
-				renderSearchResults(resultsMovies, resultsSeries);
+
+			if (resultsMovies.length > 0 || resultsSeries.length > 0) {
+				if (rule) {
+					if (rule == 'tv') {
+						renderSearchResults(null, resultsSeries);
+					} else {
+						renderSearchResults(resultsMovies, null);
+					}
+				} else {
+					renderSearchResults(resultsMovies, resultsSeries);
+				}
 			}
 		}
 	})
 }
 
 function renderSearchResults(movies, series) {
-	console.log(movies);
-	const everything = [...movies, ...series]
+
+	let everything;
+	if (movies && series) {
+		everything = [...movies, ...series]
+	} else if (movies === null) {
+		everything = [...series]
+	} else {
+		everything = [...movies]
+	}
+
 	const allRes = everything.sort((a, b) => b.popularity - a.popularity);
-	//console.log(allRes);
+
 	const htmlRes = allRes.map((movie) => {
 		let airTime = ''
 		if (movie.type === 'tv') {
