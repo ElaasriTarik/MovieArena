@@ -36,6 +36,7 @@ addToFavsBtn.addEventListener('click', (e) => {
 			//console.log(data);
 			if (data.message === 'success') {
 				addToFavsBtn.textContent = 'Added!';
+				addToFavsBtn.style.color = 'black';
 				addToFavsBtn.dataset.fav = 'true';
 				addToFavsBtn.style.backgroundColor = '#bdffbd';
 			}

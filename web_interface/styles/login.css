@@ -4,7 +4,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #f2f2f2;
+	background-color: #76ABAE;
 	top: 10rem;
 	position: relative;
 	margin: auto;
@@ -52,7 +52,7 @@
 
 .loginBox input,
 .signUpForm input {
-	width: 80%;
+	width: 23rem;
 	min-height: 2.2rem;
 	border: none;
 	border-radius: 3px;
@@ -83,7 +83,7 @@
 	height: 2.2rem;
 	border: none;
 	border-radius: 3px;
-	background-color: #928888;
+	background-color: #31363F;
 	cursor: pointer;
 	outline: none;
 	display: flex;
@@ -97,4 +97,11 @@
 a {
 	text-decoration: none;
 	color: #353535;
+	padding: 4px 10px;
+	border-radius: 4px;
+}
+
+a:hover {
+	background-color: #434b5c;
+	color: #EEEEEE;
 }

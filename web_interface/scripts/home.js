@@ -12,12 +12,13 @@ $(function () {
 		$('#searchResults').css('display', 'block');
 		$('#options').css('display', 'none');
 		const thisOption = $('#thisOption')[0];
-		console.log(thisOption.textContent);
-		if (thisOption.textContent === 'Movies') {
-			console.log('--> movies');
+		console.log(thisOption);
+		if (thisOption.innerText === 'Movies') {
 			startSearch('movie', e.target.value, 'movie');
-		} else if (thisOption.textContent === 'Shows') {
+		} else if (thisOption.innerText === 'Shows') {
 			startSearch('tv', e.target.value, 'tv');
+		} else if (thisOption.innerText === 'users') {
+			startSearch('users', e.target.value, 'users');
 		} else {
 			startSearch('movie', e.target.value);
 			startSearch('tv', e.target.value);
@@ -48,52 +49,85 @@ let seriesRes = []
 let resultsMovies;
 let resultsSeries;
 function startSearch(contentType, query, rule) {
-	$.ajax({
-		type: 'GET',
-		url: `https://api.themoviedb.org/3/search/${contentType}?query=${query}&language=en-US&page=1`,
-		headers: headers,
-		success: async (data) => {
-			movies = await data.results
-
-			if (contentType === 'movie') {
-				moviesRes = movies;
-				resultsMovies = moviesRes.map(item => {
-					item.type = 'movie'
-					return item
-				})//.sort((a, b) => a.vote_avergae - b.vote_avergae);
-				//console.log(resultsMovies);
-			} else {
-				seriesRes = movies;
-				resultsSeries = seriesRes.map((item) => {
-					item.type = 'tv'
-					return item
-				})//.sort((a, b) => a.vote_avergae - b.vote_avergae);
+	if (rule == 'users') {
+		console.log('searching for users');
+		$.ajax({
+			type: 'GET',
+			url: `http://localhost:5500/getUsers?username=${query}`,
+			success: async (data) => {
+				const users = await data;
+				const htmlRes = users.map((user) => {
+					return `<div class="col-md-3 userCol">
+							<div class="well text-center searchContent movieCardSearch userCardSearch" data-userid=${user.id} >
+								<div class="userprofile">
+									<img src="images/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="Movie Poster" class="movieSearchPoster userProgilrImage">
+								</div>
+								<div class="movieInfo userinfo">
+							
+								<h2 class="fullnameRes">${user.fullname}</h2>
+								</div>
+							</div>`
+				});
+				$('#searchResults').empty()
+				$('#searchResults').append(htmlRes)
+				const userCards = $('.userCardSearch').toArray();
+				userCards.forEach(card => {
+					card.addEventListener('click', (event) => {
+						const userID = event.currentTarget.dataset.userid;
+						console.log(userID);
+						window.location.href = `user.html?userID=${userID}`;
+					});
+				});
 			}
+		})
+	}
+	else {
+		$.ajax({
+			type: 'GET',
+			url: `https://api.themoviedb.org/3/search/${contentType}?query=${query}&language=en-US&page=1`,
+			headers: headers,
+			success: async (data) => {
+				movies = await data.results
 
-			if (resultsMovies.length > 0 || resultsSeries.length > 0) {
-				if (rule) {
-					if (rule == 'tv') {
-						renderSearchResults(null, resultsSeries);
-					} else {
-						renderSearchResults(resultsMovies, null);
-					}
+				if (contentType === 'movie') {
+					moviesRes = movies;
+					resultsMovies = moviesRes.map(item => {
+						item.type = 'movie'
+						return item
+					})//.sort((a, b) => a.vote_avergae - b.vote_avergae);
+					//console.log(resultsMovies);
 				} else {
-					renderSearchResults(resultsMovies, resultsSeries);
+					seriesRes = movies;
+					resultsSeries = seriesRes.map((item) => {
+						item.type = 'tv'
+						return item
+					})//.sort((a, b) => a.vote_avergae - b.vote_avergae);
+				}
+
+				if (resultsMovies || resultsSeries) {
+					if (rule) {
+						if (rule == 'tv') {
+							renderSearchResults(null, resultsSeries);
+						} else {
+							renderSearchResults(resultsMovies, null);
+						}
+					} else {
+						renderSearchResults(resultsMovies, resultsSeries);
+					}
 				}
 			}
-		}
-	})
+		})
+	}
 }
 
 function renderSearchResults(movies, series) {
-
 	let everything;
 	if (movies && series) {
-		everything = [...movies, ...series]
+		everything = [...movies, ...series];
 	} else if (movies === null) {
-		everything = [...series]
+		everything = [...series];
 	} else {
-		everything = [...movies]
+		everything = [...movies];
 	}
 
 	const allRes = everything.sort((a, b) => b.popularity - a.popularity);

@@ -227,7 +227,8 @@ function chechIFfavs(data) {
 			if (data.message === 'success') {
 				const addToFavsBtn = $('#addToFavsBtn')[0];
 				addToFavsBtn.textContent = 'In your favourites!';
-				addToFavsBtn.style.backgroundColor = '#bdffbd';
+				addToFavsBtn.style.color = '#EEEEEE'
+				addToFavsBtn.style.backgroundColor = '#76ABAE';
 				addToFavsBtn.dataset.fav = 'true';
 			}
 		});

@@ -13,6 +13,7 @@
 
 #header {
 	background-color: #e0d0c4;
+	background-color: #222831;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -39,6 +40,7 @@
 	float: left;
 	margin: .5rem;
 	color: #353535;
+	color: #eee;
 	padding: 10px;
 }
 
@@ -70,6 +72,7 @@
 	font-weight: bold;
 	margin: .5rem;
 	color: #353535;
+	color: #eee;
 	font-weight: 800;
 	width: 100%;
 	padding: 3px 5px;
@@ -97,8 +100,15 @@
 		max-width: 1.7rem;
 	}
 
+	#user_name p {
+		width: max-content;
+		text-align: center;
+	}
+
 	#user_name a {
 		font-size: .8rem;
+		text-align: center;
+		width: max-content;
 	}
 
 	.list_titles {

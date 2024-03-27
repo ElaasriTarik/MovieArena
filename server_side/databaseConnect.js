@@ -456,6 +456,20 @@ app.get('/getRating', (req, res) => {
 		})
 	})
 })
+// get users accotding to query
+app.get('/getUsers', (req, res) => {
+	const { username } = req.query;
+	const getUsers = `SELECT * FROM users WHERE fullname LIKE ?;`;
+	connection.query(getUsers, [username + '%'], (error, results, fields) => {
+		if (error) {
+			console.error(error);
+			res.status(500).send({ message: 'Database error' });
+			return;
+		}
+		res.send(results);
+	});
+})
+
 
 function getAllMovies(userID) {
 	//console.log('getting movies', userID);

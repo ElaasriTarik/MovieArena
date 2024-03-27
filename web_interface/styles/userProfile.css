@@ -47,14 +47,14 @@
 .userDetails .userFullName {
 	font-size: 1.5rem;
 	font-weight: 700;
-	color: #343434;
+	color: #EEEEEE;
 	width: max-content;
 }
 
 .userDetails .userUsername {
 	font-size: .9rem;
 	font-weight: 500;
-	color: #5a5858;
+	color: #EEEEEE;
 }
 
 .userDetails .logOutButton {
@@ -63,7 +63,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #c08a8a;
+	background-color: #76ABAE;
 	color: #fff;
 	font-size: 1rem;
 	font-weight: 700;
@@ -99,7 +99,7 @@
 	flex-direction: column;
 	gap: .5rem;
 	align-items: center;
-	color: #5c5757;
+	color: #EEEEEE;
 }
 
 /** mainConetnt body */
@@ -174,7 +174,7 @@
 	justify-content: center;
 	font-size: .7rem;
 	font-weight: 700;
-	color: #3d3636;
+	color: #EEEEEE;
 
 }
 

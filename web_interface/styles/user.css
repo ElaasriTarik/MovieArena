@@ -14,11 +14,12 @@
 h5 {
 	font-weight: 600;
 	font-size: .8rem;
+	color: #EEE;
 }
 
 .followButton {
 	padding: 4px 10px;
-	background-color: lightblue;
+	background-color: #76ABAE;
 	font-size: 16px;
 	border: 0;
 	border-radius: 4px;
