@@ -7,7 +7,7 @@ if (!localFullname && !localUsername) {
 	usernameDisplay.href = 'login.html';
 }
 else {
-	usernameDisplay.textContent = localFullname;
+	usernameDisplay.textContent = 'You';
 }
 // getting followers count
 const userId = new URLSearchParams(window.location.search).get('userID');

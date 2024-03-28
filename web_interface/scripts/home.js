@@ -3,8 +3,15 @@ headers = {
 	'accept': 'application/json',
 }
 $(function () {
-	// check user login status
+	// search interactivity
+	const searchArea = $(".searchAreaBG");
+	$(".searchIcon").click(function () {
+		console.log('clicked');
+		searchArea.css('display', 'flex');
+		searchArea.css('height', '100vh');
+		searchArea.css('animation', 'both openUp .3s')
 
+	});
 	// Get the search input
 	const searchInput = $('#searchText');
 	const dropDownBox = $('#dropDownBox');
@@ -28,6 +35,7 @@ $(function () {
 			const searchResults = $('#searchResults');
 			if (!searchResults.is(event.target) && searchResults.has(event.target).length === 0) {
 				searchResults.css('display', 'none');
+				$('.searchAreaBG').css('display', 'none');
 			}
 		});
 	});

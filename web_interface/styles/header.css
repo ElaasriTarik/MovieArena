@@ -12,8 +12,6 @@
 }
 
 #header {
-	background-color: #e0d0c4;
-	background-color: #222831;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -30,6 +28,8 @@
 	font-size: 1rem;
 
 	list-style: none;
+	border-bottom: 1px solid #EEEEEE;
+
 }
 
 .list_titles li {
@@ -44,14 +44,40 @@
 	padding: 10px;
 }
 
+.list_titles li a:hover {
+	color: rgb(194, 218, 239);
+
+}
+
+.userBoxInfo {
+	display: flex;
+	width: 100%;
+	align-items: center;
+}
 
 #user_box {
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
-	padding: 0 .4rem;
-	max-width: 15rem;
+	padding: 0 .6rem;
+	max-width: 20rem;
+	width: 10rem;
+	margin-left: 2rem;
 }
+
+.searchIcon {
+	width: 1.5rem;
+	height: auto;
+
+}
+
+
+
+
+
+
+
 
 #user_image {
 	min-width: 2rem;
@@ -80,8 +106,7 @@
 }
 
 #user_name a:hover {
-	text-decoration: underline;
-	background-color: #e6deb1;
+	color: #b1d9e6;
 
 }
 

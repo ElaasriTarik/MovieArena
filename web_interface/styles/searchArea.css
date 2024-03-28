@@ -1,23 +1,35 @@
+.searchAreaBG {
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #000000c1;
+	z-index: 100;
+	top: -9rem;
+	display: flex;
+}
+
 #searchArea {
-	width: 50vw;
-	min-width: 40vw;
-	max-width: 60vw;
+	width: 100%;
 	height: 3rem;
 	border: 1px solid #262626;
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-around;
 	flex-direction: column;
-	position: relative;
-	margin: auto;
-	margin-top: 6rem;
+	position: absolute;
 	border: none;
 	z-index: 101;
+	margin-right: -3rem;
+	left: 0;
+	top: 4rem;
+	margin-bottom: 3rem;
+	background-color: #232323;
 }
 
 #searchBox {
 	display: flex;
-	width: 100%;
+	width: 50%;
 	height: 2.2rem;
 	padding-right: 4rem;
 	align-items: center;
@@ -25,6 +37,8 @@
 	position: relative;
 	margin-bottom: .7rem;
 	z-index: 100;
+	margin: auto;
+
 }
 
 #searchBox input {
@@ -41,6 +55,22 @@
 	position: absolute;
 }
 
+.searchLogo {
+	width: 1.4rem;
+	position: absolute;
+	right: 0;
+}
+
+@keyframes openUp {
+	0% {
+		top: -5rem;
+	}
+
+	100% {
+		top: 0%;
+	}
+}
+
 #dropDownBox {
 	cursor: pointer;
 	position: relative;
@@ -53,7 +83,6 @@
 	display: flex;
 	flex-direction: column;
 	gap: .2rem;
-
 }
 
 #options {
@@ -141,17 +170,18 @@
 
 #searchResults {
 	position: absolute;
-	width: 100%;
+	width: 50%;
+	margin: auto;
 	min-height: 3rem;
 	max-height: 24rem;
 	background-color: #222831;
-	margin-top: .1rem;
 	overflow: scroll;
 	display: none;
 	z-index: 100;
 	top: 4rem;
 	border: 1px solid #EEEEEE;
 	border-radius: 4px;
+	margin-left: 25%;
 }
 
 .movieImageContainer {

@@ -6,7 +6,7 @@ if (!localFullname && !localUsername) {
 	usernameDisplay.href = '/web_interface/login.html';
 }
 else {
-	usernameDisplay.textContent = localFullname;
+	usernameDisplay.textContent = 'You';
 }
 const userFullName = document.querySelector('.profileFullname');
 const userUsername = document.querySelector('.profileUsername');

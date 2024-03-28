@@ -389,6 +389,7 @@
 	position: relative;
 	border-radius: 5px;
 	overflow: hidden;
+	padding-right: 10px;
 }
 
 .commentsSection h2 {
@@ -424,15 +425,14 @@
 	display: flex;
 	align-items: flex-start;
 	justify-content: flex-start;
-	padding: .5rem;
 	position: relative;
 	overflow: hidden;
 	margin-bottom: -1.8rem;
+	margin-bottom: 3px;
 }
 
 .commentUser {
 	width: 4rem;
-	background-color: rgb(255, 246, 231);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -465,11 +465,10 @@
 
 .commentBox>div {
 	height: 100%;
-	padding: 1rem 0.4rem;
+	padding: 1rem 0.6rem;
 	position: relative;
 	overflow: scroll;
-	border-radius: .1rem;
-	background-color: #e1dcd5;
+	border-radius: 1rem;
 
 
 }
@@ -483,7 +482,7 @@
 	align-items: center;
 	justify-content: space-around;
 	gap: 1.3rem;
-	background-color: rgb(255, 246, 231);
+	background-color: #ebedec;
 }
 
 .commentContent .comment {
@@ -517,7 +516,7 @@
 	width: 70%;
 	height: 100%;
 	border: 1px solid rgb(232, 207, 182);
-	background-color: #e4ddd6;
+	background-color: #ebedec;
 	resize: none;
 	border-radius: 3px;
 	padding: 4px;
