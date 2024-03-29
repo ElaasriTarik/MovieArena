@@ -50,6 +50,59 @@ $(function () {
 		})
 
 	});
+	// adding a carousell effect
+	const carouselContainer = $('.carouselContainer').toArray();
+	fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=ab237928dca160604937a71f947d6c62')
+		.then((response) => response.json())
+		.then((data) => {
+			const movies = data.results;
+			console.log(movies);
+			const htmlRes = movies.map((movie) => {
+				return `<div class="prevList slide">
+					<div class="slideInfo">
+						<h2 class="slideTitle">${movie.title}</h2>
+						<p class="slideOverview">${movie.overview}</p>
+						<p class="releaseDate">${movie.release_date} | ${movie.vote_average.toFixed(1)}</p>
+						<div class="favButton">
+				<img src="images/icons8-add-to-favorite-48.png" alt="" class="addToFavourites">
+				<button type="button" id="addToFavsBtn">Add to Favourites</button>
+			</div>
+					</div>
+					<img src="https://image.tmdb.org/t/p/original/${movie.backdrop_path}" alt="Movie Poster" class="movieSearchPoster">
+				</div>`
+			})
+			carouselContainer[0].innerHTML = htmlRes.join('');
+			const slides = document.querySelectorAll('.slide');
+			const prevButton = document.querySelector('.prev');
+			const nextButton = document.querySelector('.next');
+
+			let currentSlide = 0;
+			const numSlides = slides.length;
+
+			// Function to move the slides
+			function translateSlides(slideIndex) {
+				console.log(slideIndex);
+				carouselContainer[0].style.transform = `translateX(-${slideIndex * 100}%)`;
+				currentSlide = slideIndex;
+			}
+
+			// Button Event Listeners
+			nextButton.addEventListener('click', () => {
+				let newIndex = (currentSlide + 1) % numSlides;
+				translateSlides(newIndex);
+			});
+
+			prevButton.addEventListener('click', () => {
+				let newIndex = (currentSlide - 1 + numSlides) % numSlides;
+				translateSlides(newIndex);
+			});
+			setInterval(() => {
+				let newIndex = (currentSlide + 1) % numSlides;
+				translateSlides(newIndex);
+			}, 4000)
+		});
+
+
 });
 
 let moviesRes = []
