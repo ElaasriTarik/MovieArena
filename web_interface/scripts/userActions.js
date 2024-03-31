@@ -35,7 +35,9 @@ addToFavsBtn.addEventListener('click', (e) => {
 		.then((data) => {
 			//console.log(data);
 			if (data.message === 'success') {
-				addToFavsBtn.textContent = 'Added!';
+				const addToFavsIcon = $('.addToFavourites')[0];
+				addToFavsIcon.src = 'images/checked.png';
+				addToFavsBtn.textContent = 'In your favs!';
 				addToFavsBtn.style.color = 'black';
 				addToFavsBtn.dataset.fav = 'true';
 				addToFavsBtn.style.backgroundColor = '#bdffbd';

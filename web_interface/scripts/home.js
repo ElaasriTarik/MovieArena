@@ -61,10 +61,10 @@ $(function () {
 				return `<div class="prevList slide">
 					<div class="slideInfo">
 						<h2 class="slideTitle">${movie.title}</h2>
-						<p class="slideOverview">${movie.overview}</p>
+						<p class="slideOverview">${movie.overview.substring(0, 150)}...</p>
 						<p class="releaseDate">${movie.release_date} | ${movie.vote_average.toFixed(1)}</p>
 						<div class="favButton">
-				<img src="images/icons8-add-to-favorite-48.png" alt="" class="addToFavourites">
+				<img src="images/addToBookmark.png" alt="" class="addToFavourites">
 				<button type="button" id="addToFavsBtn">Add to Favourites</button>
 			</div>
 					</div>
@@ -118,10 +118,11 @@ function startSearch(contentType, query, rule) {
 			success: async (data) => {
 				const users = await data;
 				const htmlRes = users.map((user) => {
+
 					return `<div class="col-md-3 userCol">
 							<div class="well text-center searchContent movieCardSearch userCardSearch" data-userid=${user.id} >
 								<div class="userprofile">
-									<img src="images/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="Movie Poster" class="movieSearchPoster userProgilrImage">
+									<img src="images/addToBookmark.jpg" alt="Movie Poster" class="movieSearchPoster userProgilrImage">
 								</div>
 								<div class="movieInfo userinfo">
 							
@@ -192,11 +193,12 @@ function renderSearchResults(movies, series) {
 	}
 
 	const allRes = everything.sort((a, b) => b.popularity - a.popularity);
-
+	console.log(allRes);
 	const htmlRes = allRes.map((movie) => {
 		let airTime = ''
 		if (movie.type === 'tv') {
-			airTime = movie.first_air_date.split('-')[0]
+			airTime = movie.first_air_date.split('-')[0] + ' - ';
+			airTime += movie.last_air_date ? movie.last_air_date.split('-')[0] : 'N/A'
 		} else {
 			airTime = movie.release_date
 		}

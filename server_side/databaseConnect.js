@@ -469,8 +469,50 @@ app.get('/getUsers', (req, res) => {
 		res.send(results);
 	});
 })
-
-
+// add to watchlist
+app.post('/addToWatchlist', (req, res) => {
+	const { contentType, contentID, userid, img } = req.body;
+	const addToWatchlistQuery = `INSERT INTO watchlist (userID, contentType, contentID, img) values (?, ?, ?, ?)`;
+	connection.query(addToWatchlistQuery, [userid, contentType, contentID, img], (error, results, fields) => {
+		if (error) {
+			console.log(error)
+			res.status(500).send({ message: 'Database error' })
+			return;
+		}
+		res.send({ message: 'success' });
+	});
+});
+// check watchlist 
+app.get('/checkWatchList', (req, res) => {
+	const { contentType, contentID, userID } = req.query;
+	const checkWatchlistQuery = `SELECT * FROM watchlist WHERE userID = ? AND contentType = ? AND contentID = ?`;
+	connection.query(checkWatchlistQuery, [userID, contentType, contentID], (error, results, fields) => {
+		if (error) {
+			console.log(error)
+			res.status(500).send({ message: 'Database error' })
+			return;
+		}
+		if (results.length > 0) {
+			res.send({ message: 'success' });
+		} else {
+			res.send({ message: 'fail' });
+		}
+	});
+})
+// delete from watchlist
+app.post('/deleteFromWatchlist', (req, res) => {
+	const { contentType, contentID, userID } = req.body;
+	console.log(contentType, contentID, userID);
+	const deleteFromWatchlistQuery = `DELETE FROM watchlist WHERE userID = ? AND contentType = ? AND contentID = ?`;
+	connection.query(deleteFromWatchlistQuery, [userID, contentType, parseInt(contentID)], (error, results, fields) => {
+		if (error) {
+			console.log(error)
+			res.status(500).send({ message: 'Database error' })
+			return;
+		}
+		res.send({ message: 'success' });
+	});
+})
 function getAllMovies(userID) {
 	//console.log('getting movies', userID);
 	const getMovies = `SELECT * FROM movies WHERE user_id = ?;`;
@@ -482,7 +524,19 @@ function getAllMovies(userID) {
 		console.log(results);
 	});
 }
-
+// get watchlist
+app.get('/getWatchlist', (req, res) => {
+	const { id } = req.query;
+	const getWatchlist = `SELECT * FROM watchlist WHERE userID = ?;`;
+	connection.query(getWatchlist, [id], (error, results, fields) => {
+		if (error) {
+			console.error(error);
+			res.status(500).send({ message: 'Database error' });
+			return;
+		}
+		res.send({ watchlist: results });
+	});
+})
 
 // function to check if user exists
 function checkUser(username) {
@@ -502,6 +556,7 @@ function checkUser(username) {
 		});
 	});
 }
+
 
 const port = process.env.PORT || 5000;
 

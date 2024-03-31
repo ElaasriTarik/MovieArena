@@ -139,6 +139,40 @@
 	color: #EEEEEE;
 }
 
+.addToWatchList {
+	max-width: 10rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	height: 2rem;
+	background-color: #76ABAE;
+	border-radius: 3px;
+	bottom: 0;
+	cursor: pointer;
+}
+
+.addToWatchList>button {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: transparent;
+	border: none;
+	text-align: right;
+	padding-right: 10px;
+	color: #EEEEEE;
+	font-size: .9rem;
+	cursor: pointer;
+}
+
+.addToWatchList img {
+	width: 1.5rem;
+	height: auto;
+	position: absolute;
+	z-index: 100;
+	left: 10px;
+}
+
 .watchProviders {
 	width: 20%;
 	max-width: 25%;

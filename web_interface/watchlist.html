@@ -4,17 +4,17 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Movie Arena Home page</title>
+	<title>Your watchlist</title>
 	<link rel="stylesheet" href="styles/home.css">
 	<link rel="stylesheet" href="styles/header.css">
 	<link rel="stylesheet" href="styles/searchArea.css">
-	<link rel="stylesheet" href="styles/bo dy.css">
-	<link rel="stylesheet" href="styles/movie.css">
+	<link rel="stylesheet" href="styles/body.css">
+	<link rel="stylesheet" href="styles/watchlist.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="scripts/home.js"></script>
 	<script src="scripts/latests.js"></script>
+	<script src="scripts/redirectToMoviePage.js" defer></script>
 	<script src="scripts/userProfile.js" defer></script>
-
 </head>
 
 <body>
@@ -29,7 +29,7 @@
 		<ul class="list_titles">
 			<li><a href="index.html"><img src="images/home.png" class="listIcons" /> Home</a></li>
 
-			<li><a href="watchlist.html"><img src="images/bookmark.png" class="listIcons" /> WatchList</a></li>
+			<li><a href="#"><img src="images/bookmark.png" class="listIcons" /> WatchList</a></li>
 
 		</ul>
 
@@ -79,60 +79,28 @@
 		</div>
 	</header>
 
-
-	<div id="movieInfo">
-		<div id="moviePosterFav">
-			<div class="moviePoster" data-movie-id="">
-				<span class="contentStatus"></span>
-				<img alt="" class="movieImg" src="https://image.tmdb.org/t/p/w500${data.poster_path}">
+	<section class="watchContainer">
+		<div class="watchHeader">
+			<div class="headerText">
+				<h1>Your WatchList</h1>
+				<div class="watchStatus">
+					<img src="images/lock.png" alt="" class="lockIcon">
+					<p>PRIVATE</p>
+				</div>
 			</div>
-			<div class="favButton">
-				<img src="images/bookmark.png" alt="" class="addToFavourites">
-				<button type="button" id="addToFavsBtn">Add to Favourites</button>
-			</div>
-		</div>
-		<div class="movieDetails">
 
-
-		</div>
-		<div class="watchProviders">
-			<h2 class="whereTilte">Where to watch?</h2>
-			<div class="watchProvidersContainer">
-
-			</div>
-			<div class="justWatchContainer">
-				<a href="justwatch.com">
-					<img src="images/JustWatch-logo-large.png" alt="powered by justWatch">
-				</a>
+			<div class="editBox">
+				<img class="editWatch" src="images/edit.png" alt="">
+				<p>Edit</p>
 			</div>
 		</div>
-	</div>
-	<div class="actorsContainer">
-		<h2>Actors</h2>
-		<div class="actors">
+		<div class="watchlistContent">
 
 		</div>
-	</div>
-	<div class="similarMoviesContainer">
-		<h2>You might also like</h2>
-		<div class="similarMovies">
+	</section>
 
-		</div>
-	</div>
-	<div class="commentsSection">
-		<h2 class="commentsHeader">Comments <span id="commentCount"></span></h2>
-		<div class="addComment">
-			<textarea name="comment" id="comment" cols="30" rows="10"></textarea>
-			<button type="button" id="addCommentBtn">Add Comment</button>
-		</div>
-		<div class="comments">
-
-		</div>
-
-	</div>
-	<script src="scripts/redirectToMoviePage.js"></script>
-	<script src="scripts/getContentID.js"></script>
-	<script src="scripts/userActions.js" defer></script>
+	<script src="scripts/redirectToMoviePage.js" defer></script>
+	<script src="scripts/watchlist.js"></script>
 </body>
 
 </html>

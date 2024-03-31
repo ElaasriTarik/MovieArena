@@ -4,7 +4,6 @@ const contentType = urlParams.get('type')
 
 $(window).on('load', function () {
 	$(() => {
-
 		$.ajax({
 			url: `https://api.themoviedb.org/3/${contentType}/${contentID}?language=en-US`,
 			type: 'GET',
@@ -53,7 +52,12 @@ $(window).on('load', function () {
 						<p class="addRatingLabel">Rate</p>
 					</div>
 					<h4 class="genres"><bold>Genres: </bold>${gg.join(' ')}
-					</h4>`
+					</h4>
+					<div class="addToWatchList">
+						<img class="addToWatchIcon" src="images/addToBookmark.png"/>
+						<button id="addToWatch" data-watchlist="false">Add to Watchlist</button>
+					</div>
+					`
 
 				);
 				// trigger the rate Icon option
@@ -124,6 +128,76 @@ $(window).on('load', function () {
 
 					}
 
+				});
+				// add to watchlist
+				const addToWatch = $('#addToWatch')[0];
+				// if (addToWatch.dataset.watchlist == 'true') {
+				// 	addToWatch.dataset.watchlist = 'false';
+				// 	removeFromWatchList();
+				// 	return;
+				// }
+				addToWatch.addEventListener('click', (e) => {
+					console.log('clicked');
+					if (localStorage.getItem('username') === null) {
+						alert('You need to be logged in to add to watchlist');
+						return;
+					}
+					if (addToWatch.dataset.watchlist == 'true') {
+						return;
+					}
+					fetch('http://localhost:5500/addToWatchList', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({
+							contentType: contentType,
+							contentID: contentID,
+							userid: localStorage.getItem('id'),
+							img: $('.movieImg').attr('src').split('https://image.tmdb.org/t/p/original/')[1],
+						})
+					})
+						.then((response) => response.json())
+						.then((data) => {
+							console.log(data);
+							if (data.message === 'success') {
+								const watchIcon = $('.addToWatchIcon')[0];
+								watchIcon.src = 'images/checked.png';
+								e.target.textContent = 'In your Watchlist';
+								e.target.dataset.watchlist = 'true';
+								e.target.style.backgroundColor = '#76ABAE';
+								removeFromWatchList();
+							}
+						});
+				})
+				// delete from watch list
+				const deleteFromWatch = $('#addToWatch')[0];
+				deleteFromWatch.addEventListener('click', (e) => {
+					console.log('clicked');
+					if (deleteFromWatch.dataset.watchlist == 'true') {
+						fetch('http://localhost:5500/deleteFromWatchList', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify({
+								contentType: contentType,
+								contentID: contentID,
+								userID: localStorage.getItem('id')
+							})
+						})
+							.then((response) => response.json())
+							.then((data) => {
+								console.log(data);
+								if (data.message === 'success') {
+									const watchIcon = $('.addToWatchIcon')[0];
+									watchIcon.src = 'images/addToBookmark.png';
+									e.target.textContent = 'Add to Watchlist';
+									e.target.dataset.watchlist = 'false';
+									e.target.style.backgroundColor = '#76ABAE';
+								}
+							});
+					}
 				});
 
 				// get the watch providers list
@@ -202,10 +276,14 @@ $(window).on('load', function () {
 						`
 						})
 						$('.similarMovies').append(similarList.join(''))
-
+						//activateWatchList();
 						getRating();
 						makeCardActive();
 						getComments();
+						// addToWatchlist();
+						// removeFromWatchList();
+						checkwatchlist();
+						//deleteFromWatchList();
 					}
 				})
 			}
@@ -226,6 +304,8 @@ function chechIFfavs(data) {
 			//console.log(data);
 			if (data.message === 'success') {
 				const addToFavsBtn = $('#addToFavsBtn')[0];
+				const addToFavsIcon = $('.addToFavourites')[0];
+				addToFavsIcon.src = 'images/checked.png';
 				addToFavsBtn.textContent = 'In your favourites!';
 				addToFavsBtn.style.color = '#EEEEEE'
 				addToFavsBtn.style.backgroundColor = '#76ABAE';
@@ -387,3 +467,28 @@ function getRating() {
 			$('.rating').text(`${rating}`);
 		});
 }
+
+
+function checkwatchlist() {
+	fetch(`http://localhost:5500/checkWatchList?userID=${localStorage.getItem('id')}&contentID=${contentID}&contentType=${contentType}`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			console.log(data);
+			if (data.message === 'success') {
+				const addToWatch = $('#addToWatch')[0];
+				const watchIcon = $('.addToWatchIcon')[0];
+				watchIcon.src = 'images/checked.png';
+				addToWatch.textContent = 'In your watchlist!';
+				addToWatch.style.color = '#EEEEEE';
+				addToWatch.style.backgroundColor = '#76ABAE';
+				addToWatch.dataset.watchlist = 'true';
+			}
+		});
+}
+// delete from watch list
+

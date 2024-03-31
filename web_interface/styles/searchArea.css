@@ -201,10 +201,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 1rem;
 	position: relative;
 	background-color: #e8e8e8;
-	background-color: #222831;
+	background-color: #1c1e22;
 	cursor: pointer;
 	border-bottom: 1px solid #EEEEEE;
 }
@@ -217,7 +216,7 @@
 .movieInfo {
 	display: flex;
 	align-items: flex-start;
-	justify-content: flex-start;
+	justify-content: center;
 	gap: .1rem;
 	flex-direction: column;
 	width: 90%;
@@ -251,12 +250,13 @@
 }
 
 .titleSearch {
-	font-size: 1.1rem;
-	font-weight: 800;
+	font-size: 1rem;
+	font-weight: 700;
 	color: #262626;
 	color: #EEEEEE;
 	width: 100%;
-	font-weight: 500;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .ratingSearch {

@@ -8,7 +8,7 @@
 }
 
 .page_logo {
-	width: 100%;
+	width: 2.5rem;
 }
 
 #header {
@@ -22,18 +22,19 @@
 	margin-bottom: 2rem;
 	z-index: 1000;
 	padding: 0 1rem;
+	background-color: rgba(0, 0, 0, .1);
 }
 
 .list_titles {
-	font-size: 1rem;
+	font-size: .9rem;
 
 	list-style: none;
-	border-bottom: 1px solid #EEEEEE;
 
 }
 
 .list_titles li {
 	display: inline;
+
 }
 
 .list_titles li a {
@@ -42,10 +43,22 @@
 	color: #353535;
 	color: #eee;
 	padding: 10px;
+	text-align: center;
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	gap: 10px;
+
 }
 
 .list_titles li a:hover {
 	color: rgb(194, 218, 239);
+
+}
+
+.listIcons {
+	width: 1.2rem;
+	height: auto;
 
 }
 
@@ -80,11 +93,11 @@
 
 
 #user_image {
-	min-width: 2rem;
+	min-width: 1rem;
 	min-height: auto;
-	max-width: 2.2rem;
+	max-width: 1.5rem;
 	border-radius: 50%;
-	margin: .6rem;
+	margin-left: 1rem;
 }
 
 #user_image img {
@@ -96,7 +109,6 @@
 #user_name a {
 	font-size: 1rem;
 	font-weight: bold;
-	margin: .5rem;
 	color: #353535;
 	color: #eee;
 	font-weight: 800;
