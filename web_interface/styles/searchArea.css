@@ -168,6 +168,20 @@
 
 }
 
+.closeBtn {
+	position: absolute;
+	right: -2.2rem;
+	width: 1.6rem;
+	height: 1.6rem;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.closeLogo {
+	width: 100%;
+	height: 100%;
+}
+
 #searchResults {
 	position: absolute;
 	width: 50%;

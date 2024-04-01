@@ -10,6 +10,13 @@ $(function () {
 		searchArea.css('display', 'flex');
 		searchArea.css('height', '100vh');
 		searchArea.css('animation', 'both openUp .3s')
+		//const searchArea = $(".searchAreaBG");
+		const closebtn = $(".closeLogo");
+		console.log(closebtn);
+		closebtn.click(function () {
+			console.log('clicked');
+			searchArea.css('display', 'none');
+		});
 
 	});
 	// Get the search input
@@ -58,16 +65,37 @@ $(function () {
 			const movies = data.results;
 			console.log(movies);
 			const htmlRes = movies.map((movie) => {
+				let airTime = ''
+				if (movie.type === 'tv') {
+					airTime = movie.first_air_date.split('-')[0] + ' - ' + movie.last_air_date.split('-')[0]
+				} else {
+					airTime = movie.release_date.substring(0, 7)
+				}
+				let created_by = movie.runtime ? movie.runtime + 'm' : 'N/A'
+				if (movie.hasOwnProperty('created_by') && movie.created_by.length > 0) {
+					created_by = movie.created_by[0].name
+				}
 				return `<div class="prevList slide">
 					<div class="slideInfo">
 						<h2 class="slideTitle">${movie.title}</h2>
 						<p class="slideOverview">${movie.overview.substring(0, 150)}...</p>
-						<p class="releaseDate">${movie.release_date} | ${movie.vote_average.toFixed(1)}</p>
-						<div class="favButton">
-				<img src="images/addToBookmark.png" alt="" class="addToFavourites">
-				<button type="button" id="addToFavsBtn">Add to Favourites</button>
-			</div>
+						<div class="subInfo">
+						<p class="watchlistReleaseDate">${airTime}|</p>
+						<p class="typeOfContent">${movie.type == 'tv' ? 'TV Series' : 'Movie'}|</p>
+						<p class="createdBy">${created_by}|</p>
+						
 					</div>
+						
+						<div class="buttons">
+					
+					<div class="addTowatchlist">
+					<img src="images/addToBookmark.png" alt="" class="addToWatchlist addToFavourites">
+					<button type="button" id="addToWatchlistBtn">Add to Watchlist</button>
+				</div>
+				</div>
+					</div>
+				
+
 					<img src="https://image.tmdb.org/t/p/original/${movie.backdrop_path}" alt="Movie Poster" class="movieSearchPoster">
 				</div>`
 			})
