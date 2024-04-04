@@ -1,10 +1,11 @@
 const urlParams = new URLSearchParams(window.location.search); // Get the URL parameters
 const contentID = urlParams.get('id');
 const contentType = urlParams.get('type')
+const link = 'https://movie-arena-khaki.vercel.app'
 
 $(window).on('load', function () {
 	// get watchlist from database
-	fetch(`http://localhost:5500/getWatchlist?id=${localStorage.getItem('id')}`, {
+	fetch(`${link}/getWatchlist?id=${localStorage.getItem('id')}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json'

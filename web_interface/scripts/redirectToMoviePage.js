@@ -32,7 +32,8 @@ function favBtns(favs) {
 				alert('You need to be logged in to add to favourites');
 				return;
 			}
-			fetch('http://localhost:5500/addFav', {
+			const link = 'http://localhost:5500';
+			fetch(`${link}/addFav`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

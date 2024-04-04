@@ -1,6 +1,7 @@
 const usernameDisplay = document.getElementById('username');
 const localFullname = localStorage.getItem('fullname');
 const localUsername = localStorage.getItem('username');
+
 if (!localFullname && !localUsername) {
 	usernameDisplay.textContent = 'Login';
 	usernameDisplay.href = '/web_interface/login.html';
@@ -21,8 +22,8 @@ const checkIfUserLoggedIn = localStorage.getItem('username');
 if (checkIfUserLoggedIn) {
 	//alert('You need to be logged in to see your favourites');
 
-
-	fetch(`http://localhost:5500/getFavs?username=${localUsername}`, {
+	const link = 'https://movie-arena-khaki.vercel.app';
+	fetch(`${link}/getFavs?username=${localUsername}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json'
@@ -33,7 +34,7 @@ if (checkIfUserLoggedIn) {
 		.catch(error => console.log(error));
 }
 // get follow count
-fetch(`http://localhost:5500/getFollowCount?userId=${localStorage.getItem('id')}`, {
+fetch(`${link}/getFollowCount?userId=${localStorage.getItem('id')}`, {
 	method: 'GET',
 	headers: {
 		'Content-Type': 'application/json'

@@ -2,6 +2,8 @@
 const usernameDisplay = document.getElementById('username');
 const localFullname = localStorage.getItem('fullname');
 const localUsername = localStorage.getItem('username');
+const link = 'http://localhost:5500';
+
 if (!localFullname && !localUsername) {
 	usernameDisplay.textContent = 'Login';
 	usernameDisplay.href = 'login.html';
@@ -14,7 +16,7 @@ const userId = new URLSearchParams(window.location.search).get('userID');
 let userProfileId;
 let usersUsername;
 
-fetch(`http://localhost:5500/getFollowCount?userId=${userId}`, {
+fetch(`${link}/getFollowCount?userId=${userId}`, {
 	method: 'GET',
 	headers: {
 		'Content-Type': 'application/json'
@@ -32,7 +34,7 @@ fetch(`http://localhost:5500/getFollowCount?userId=${userId}`, {
 
 // getting user's data
 
-fetch(`http://localhost:5500/getUser?id=${userId}`, {
+fetch(`${link}/getUser?id=${userId}`, {
 	method: 'GET',
 	headers: {
 		'Content-Type': 'application/json'
@@ -67,7 +69,7 @@ followBtn.addEventListener('click', (e) => {
 		unfollowUser(e);
 		return;
 	}
-	fetch('http://localhost:5500/followUser', {
+	fetch('${link}/followUser', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -96,7 +98,7 @@ function getFavs(username) {
 		//alert('You need to be logged in to see your favourites');
 
 
-		fetch(`http://localhost:5500/getFavs?username=${username}`, {
+		fetch(`${link}/getFavs?username=${username}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'
@@ -146,7 +148,7 @@ function enableClick() {
 }
 
 function checkIfFollowing(userID, username) {
-	fetch(`http://localhost:5500/checkIfFollowing?userId=${userID}&follower=${username}`, {
+	fetch(`${link}/checkIfFollowing?userId=${userID}&follower=${username}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json'

@@ -2,6 +2,7 @@ let addToFavsBtn = $('#addToFavsBtn')[0];
 
 addToFavsBtn.addEventListener('click', (e) => {
 	//console.log('clicked');
+	const link = 'https://movie-arena-khaki.vercel.app';
 	const movieId = document.querySelector('.moviePoster').dataset.movieId;
 	const moviePoster = document.querySelector('.movieImg').src;
 	const movieTitle = document.querySelector('.mainTitleMovie').textContent;
@@ -18,7 +19,7 @@ addToFavsBtn.addEventListener('click', (e) => {
 	}
 
 	console.log(movieId, parseInt(movieId));
-	fetch('http://localhost:5500/addToFavs', {
+	fetch(`${link}/addToFavs`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -46,7 +47,7 @@ addToFavsBtn.addEventListener('click', (e) => {
 });
 
 function removeFav(e, movieId, movieTitle, moviePoster) {
-	fetch('http://localhost:5500/removeFav', {
+	fetch(`${link}/removeFav`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'

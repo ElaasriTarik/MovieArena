@@ -59,7 +59,7 @@ $(function () {
 	});
 	// adding a carousell effect
 	const carouselContainer = $('.carouselContainer').toArray();
-	fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=ab237928dca160604937a71f947d6c62')
+	fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=ab237928dca160604937a71f947d6c62`)
 		.then((response) => response.json())
 		.then((data) => {
 			const movies = data.results;
@@ -138,11 +138,12 @@ let seriesRes = []
 let resultsMovies;
 let resultsSeries;
 function startSearch(contentType, query, rule) {
+	const link = 'https://movie-arena-khaki.vercel.app'
 	if (rule == 'users') {
 		console.log('searching for users');
 		$.ajax({
 			type: 'GET',
-			url: `http://localhost:5500/getUsers?username=${query}`,
+			url: `${link}/getUsers?username=${query}`,
 			success: async (data) => {
 				const users = await data;
 				const htmlRes = users.map((user) => {

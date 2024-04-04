@@ -1,6 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search); // Get the URL parameters
 const contentID = urlParams.get('id');
 const contentType = urlParams.get('type')
+const link = 'https://movie-arena-khaki.vercel.app'
 
 $(window).on('load', function () {
 	$(() => {
@@ -145,7 +146,7 @@ $(window).on('load', function () {
 					if (addToWatch.dataset.watchlist == 'true') {
 						return;
 					}
-					fetch('http://localhost:5500/addToWatchList', {
+					fetch(`${link}/addToWatchList`, {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json'
@@ -175,7 +176,7 @@ $(window).on('load', function () {
 				deleteFromWatch.addEventListener('click', (e) => {
 					console.log('clicked');
 					if (deleteFromWatch.dataset.watchlist == 'true') {
-						fetch('http://localhost:5500/deleteFromWatchList', {
+						fetch(`${link}/deleteFromWatchList`, {
 							method: 'POST',
 							headers: {
 								'Content-Type': 'application/json'
@@ -293,7 +294,7 @@ $(window).on('load', function () {
 
 });
 function chechIFfavs(data) {
-	fetch(`http://localhost:5500/checkFav?username=${localStorage.getItem('username')}&movieId=${data.id}&contentType=${contentType}`, {
+	fetch(`${link}/checkFav?username=${localStorage.getItem('username')}&movieId=${data.id}&contentType=${contentType}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json'
@@ -339,7 +340,7 @@ addCommentBtn.addEventListener('click', (e) => {
 		}, 3000);
 		return;
 	}
-	fetch('http://localhost:5500/addComment', {
+	fetch(`${link}/addComment`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -368,7 +369,7 @@ addCommentBtn.addEventListener('click', (e) => {
 });
 
 function getComments() {
-	fetch(`http://localhost:5500/getComments?contentType=${contentType}&contentID=${contentID}`, {
+	fetch(`${link}/getComments?contentType=${contentType}&contentID=${contentID}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json'
@@ -425,7 +426,7 @@ function rate(dialogueSection) {
 				rating = parseInt(star.dataset.starId);
 			}
 		});
-		fetch('http://localhost:5500/addRating', {
+		fetch(`${link}/addRating`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -453,7 +454,7 @@ function rate(dialogueSection) {
 
 // get the rating
 function getRating() {
-	fetch(`http://localhost:5500/getRating?username=${localStorage.getItem('username')}&contentType=${contentType}&contentID=${contentID}`, {
+	fetch(`${link}/getRating?username=${localStorage.getItem('username')}&contentType=${contentType}&contentID=${contentID}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json'
@@ -470,7 +471,7 @@ function getRating() {
 
 
 function checkwatchlist() {
-	fetch(`http://localhost:5500/checkWatchList?userID=${localStorage.getItem('id')}&contentID=${contentID}&contentType=${contentType}`, {
+	fetch(`${link}/checkWatchList?userID=${localStorage.getItem('id')}&contentID=${contentID}&contentType=${contentType}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json'

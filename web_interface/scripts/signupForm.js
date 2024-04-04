@@ -1,4 +1,5 @@
 const signupForm = document.querySelector('.signUpForm');
+const link = 'https://movie-arena-khaki.vercel.app';
 signupForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 	const username = document.getElementById('username').value;
@@ -9,7 +10,7 @@ signupForm.addEventListener('submit', (e) => {
 		return;
 	}
 	const password = document.getElementById('password').value;
-	fetch('http://localhost:5500/signup', {
+	fetch(`${link}/signup`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
