@@ -14,7 +14,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.static('web_interface'));
 app.use(cors({
-	origin: 'https://moviearena.onrender.com'
+	origin: 'https://moviearena.onrender.com',
 }));
 
 app.use(express.json());

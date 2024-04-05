@@ -356,5 +356,39 @@
 		text-align: center;
 	}
 
-	#mainContent #mainContentBody .movieCard {}
+	#mainContent #mainContentBody .movieCard,
+	#latestShowsBody .movieCard,
+	#topRatedShowsBody .movieCard,
+	#topRatedMoviesBody .movieCard {
+		width: 7rem;
+		min-width: 7rem;
+	}
+
+	#mainContent,
+	#latestShows,
+	#topRatedShows,
+	#topRatedMovies {
+		height: 13rem;
+	}
+
+	.addTowatchlist {
+		position: relative;
+		width: 7.5rem;
+		height: 2rem;
+	}
+
+	.addTowatchlist>img {
+		width: 1.2rem;
+	}
+
+	.addTowatchlist>button {
+		font-size: .8rem;
+	}
+
+	#mainContent h1,
+	#latestShows h1,
+	#topRatedShows h1,
+	#topRatedMovies h1 {
+		font-size: 1.3rem;
+	}
 }

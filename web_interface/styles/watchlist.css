@@ -6,6 +6,7 @@
 	margin: auto;
 	position: relative;
 	top: 5rem;
+	max-width: 50rem;
 }
 
 .watchHeader {
@@ -17,6 +18,7 @@
 	justify-content: space-between;
 	padding: 1rem 2rem;
 	color: #232323;
+	margin-bottom: .7rem;
 }
 
 .watchStatus {
@@ -143,4 +145,11 @@
 	font-size: .7rem;
 	font-weight: 600;
 	color: #575757;
+}
+
+@media screen and (max-width: 790px) {
+	.watchContainer {
+		width: 100%;
+	}
+
 }

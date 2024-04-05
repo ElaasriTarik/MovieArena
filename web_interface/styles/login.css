@@ -105,3 +105,36 @@ a:hover {
 	background-color: #434b5c;
 	color: #EEEEEE;
 }
+
+@media screen and (max-width: 600px) {
+	.loginBox {
+		width: 85%;
+		height: 21rem;
+	}
+
+	.loginFormContainer {
+		width: 90%;
+		height: 100%;
+	}
+
+	.loginForm h1,
+	.signUpForm h1 {
+		font-size: 1.5rem;
+	}
+
+	.loginForm>div,
+	.signUpForm>div {
+		width: 100%;
+		height: 2.5rem;
+	}
+
+	.loginBox input,
+	.signUpForm input {
+		width: 90%;
+	}
+
+	.loginBox .loginButton button,
+	.signUpBox .signUpButton button {
+		width: 50%;
+	}
+}
