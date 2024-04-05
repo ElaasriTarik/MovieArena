@@ -1,7 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search); // Get the URL parameters
 const contentID = urlParams.get('id');
 const contentType = urlParams.get('type')
-const link = 'https://movie-arena-khaki.vercel.app'
+const link = 'https://moviearena.onrender.com'
 
 $(window).on('load', function () {
 	$(() => {

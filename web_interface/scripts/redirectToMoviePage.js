@@ -32,7 +32,7 @@ function favBtns(favs) {
 				alert('You need to be logged in to add to favourites');
 				return;
 			}
-			const link = '/';
+			const link = 'https://moviearena.onrender.com';
 			fetch(`${link}/addFav`, {
 				method: 'POST',
 				headers: {
