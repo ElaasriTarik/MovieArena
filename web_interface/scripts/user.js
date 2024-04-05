@@ -2,7 +2,7 @@
 const usernameDisplay = document.getElementById('username');
 const localFullname = localStorage.getItem('fullname');
 const localUsername = localStorage.getItem('username');
-const link = 'http://localhost:5500';
+const link = '/';
 
 if (!localFullname && !localUsername) {
 	usernameDisplay.textContent = 'Login';

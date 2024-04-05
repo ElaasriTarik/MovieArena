@@ -1,5 +1,5 @@
 const signupForm = document.querySelector('.signUpForm');
-const link = 'https://movie-arena-khaki.vercel.app';
+const link = '/';
 signupForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 	const username = document.getElementById('username').value;
@@ -31,7 +31,7 @@ signupForm.addEventListener('submit', (e) => {
 				localStorage.setItem('username', username);
 				localStorage.setItem('fullname', fullname);
 				localStorage.setItem('id', data.id);
-				window.location.href = '/web_interface/index.html';
+				window.location.href = '/index.html';
 			}
 		});
 });

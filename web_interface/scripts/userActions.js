@@ -2,7 +2,7 @@ let addToFavsBtn = $('#addToFavsBtn')[0];
 
 addToFavsBtn.addEventListener('click', (e) => {
 	//console.log('clicked');
-	const link = 'https://movie-arena-khaki.vercel.app';
+	const link = '/';
 	const movieId = document.querySelector('.moviePoster').dataset.movieId;
 	const moviePoster = document.querySelector('.movieImg').src;
 	const movieTitle = document.querySelector('.mainTitleMovie').textContent;

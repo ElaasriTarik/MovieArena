@@ -31,7 +31,7 @@ loginForm.addEventListener('submit', (e) => {
 				localStorage.setItem('username', username);
 				localStorage.setItem('fullname', data[0].fullname);
 				localStorage.setItem('id', data[0].id);
-				window.location.href = '/web_interface/index.html';
+				window.location.href = '/index.html';
 			}
 		});
 })

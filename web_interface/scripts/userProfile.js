@@ -4,7 +4,7 @@ const localUsername = localStorage.getItem('username');
 
 if (!localFullname && !localUsername) {
 	usernameDisplay.textContent = 'Login';
-	usernameDisplay.href = '/web_interface/login.html';
+	usernameDisplay.href = '/login.html';
 }
 else {
 	usernameDisplay.textContent = localUsername;
@@ -22,7 +22,7 @@ const checkIfUserLoggedIn = localStorage.getItem('username');
 if (checkIfUserLoggedIn) {
 	//alert('You need to be logged in to see your favourites');
 
-	const link = 'https://movie-arena-khaki.vercel.app';
+	const link = '/';
 	fetch(`${link}/getFavs?username=${localUsername}`, {
 		method: 'GET',
 		headers: {
