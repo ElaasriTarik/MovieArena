@@ -12,9 +12,11 @@ const session = require('express-session');
 const cors = require('cors');
 const app = express();
 app.use(bodyParser.json());
+app.use(express.static('web_interface'));
 app.use(cors({
-	origin: 'http://127.0.0.1:5501'
+	origin: '*'
 }));
+
 app.use(express.json());
 
 
@@ -25,11 +27,7 @@ connection.connect((error) => {
 		console.log('Connected to the database');
 	}
 });
-// const alterUsersTable = 'ALTER TABLE users ADD created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP';
-// connection.query(alterUsersTable, (error, results, fields) => {
-// 	if (error) throw error;
-// 	console.log('users table altered');
-// })
+
 
 app.post('/login', (req, res) => {
 	const { username, password } = req.body;
@@ -561,5 +559,5 @@ function checkUser(username) {
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
-	console.log('Server is running on port 5500');
+	console.log('Server is running on port 5000');
 });
