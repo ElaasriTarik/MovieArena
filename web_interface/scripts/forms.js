@@ -5,7 +5,7 @@ loginForm.addEventListener('submit', (e) => {
 	const username = document.getElementById('formUsername').value;
 	const password = document.getElementById('password').value;
 	console.log(username, password);
-	const link = 'https://movie-arena-khaki.vercel.app';
+	const link = 'https://moviearena.onrender.com';
 	fetch(`${link}/login`, {
 		method: 'POST',
 		headers: {
