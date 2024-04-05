@@ -22,7 +22,7 @@ const checkIfUserLoggedIn = localStorage.getItem('username');
 if (checkIfUserLoggedIn) {
 	//alert('You need to be logged in to see your favourites');
 
-	const link = '/';
+	const link = 'https://moviearena.onrender.com';
 	fetch(`${link}/getFavs?username=${localUsername}`, {
 		method: 'GET',
 		headers: {

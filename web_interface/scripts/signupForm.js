@@ -1,5 +1,5 @@
 const signupForm = document.querySelector('.signUpForm');
-const link = '/';
+const link = 'https://moviearena.onrender.com';
 signupForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 	const username = document.getElementById('username').value;

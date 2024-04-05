@@ -2,7 +2,7 @@
 const usernameDisplay = document.getElementById('username');
 const localFullname = localStorage.getItem('fullname');
 const localUsername = localStorage.getItem('username');
-const link = '/';
+const link = 'https://moviearena.onrender.com';
 
 if (!localFullname && !localUsername) {
 	usernameDisplay.textContent = 'Login';
