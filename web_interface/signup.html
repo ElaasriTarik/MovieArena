@@ -6,13 +6,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Movie Arena Home page</title>
 	<link rel="stylesheet" href="styles/home.css">
+	<link rel="stylesheet" href="styles/searchArea.css">
 	<link rel="stylesheet" href="styles/header.css">
 	<link rel="stylesheet" href="styles/login.css">
 	<link rel="stylesheet" href="styles/signup.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="scripts/home.js"></script>
 	<script src="scripts/signupForm.js" defer></script>
-	<script src="scripts/userProfile.js"></script>
+	<script src="scripts/userProfile.js" defer></script>
 
 </head>
 
@@ -28,17 +29,55 @@
 		<ul class="list_titles">
 			<li><a href="index.html"><img src="images/home.png" class="listIcons" /> Home</a></li>
 
-			<li><a href="#"><img src="images/bookmark.png" class="listIcons" /> WatchList</a></li>
+			<li><a href="watchlist.html"><img src="images/bookmark.png" class="listIcons" /> WatchList</a></li>
 
 		</ul>
 
 		<div id="user_box">
-			<div id="user_name">
-				<p><a href="userProfile.html">John Doe</a></p>
+			<img src="images/search.png" alt="" class="searchIcon" />
+			<div class="userBoxInfo">
+				<div id="user_image">
+					<img src="images/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+						class="user_image">
+				</div>
+				<div id="user_name">
+					<p><a href="userProfile.html" id="username">John Doe</a></p>
+				</div>
 			</div>
-			<div id="user_image">
-				<img src="images/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
-					class="user_image">
+		</div>
+		<div class="searchAreaBG">
+			<div id="searchArea">
+				<div id="searchBox">
+					<img src="images/search.png" alt="" class="searchLogo" />
+					<input type="text" name="" id="searchText" placeholder="Type to search">
+					<div id="dropDownBox">
+						<div id="currOption">
+							<p id="thisOption">All</p>
+							<img src="images/arrowDown.png" alt="" class="arrowDownLogo" />
+						</div>
+						<div id="options">
+							<div class="option option1"><img class="optionIcon" src="images/search.png" />
+								<p>All</p>
+							</div>
+							<div class="option option2"><img class="optionIcon" src="images/movie.png" />
+								<p>Movies</p>
+							</div>
+							<div class="option option3"><img class="optionIcon" src="images/tv.png" />
+								<p>Shows</p>
+							</div>
+							<div class="option option4"><img class="optionIcon" src="images/users.png" />
+								<p>users</p>
+							</div>
+						</div>
+					</div>
+					<div class="closeBtn">
+						<img src="images/close.png" alt="" class="closeLogo">
+					</div>
+
+				</div>
+				<div id="searchResults">
+
+				</div>
 			</div>
 		</div>
 	</header>
