@@ -345,12 +345,22 @@
 	}
 
 	#searchBox {
-		width: 70%;
+		width: 80%;
 		padding-right: 0;
 	}
 
+	.well {
+		height: 4.2rem;
+	}
+
+	.movieImageContainer {
+		min-width: 3rem;
+		max-width: 3rem;
+	}
+
 	#searchResults {
-		width: 60%;
+		width: 80%;
+		margin-left: 10%;
 	}
 
 	@keyframes openUp {
@@ -361,6 +371,13 @@
 		100% {
 			top: 0rem;
 		}
+	}
+
+}
+
+@media (max-width: 560px) {
+	#searchResults {
+		: 80%;
 	}
 
 }

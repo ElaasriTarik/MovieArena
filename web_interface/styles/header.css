@@ -46,7 +46,7 @@
 	display: flex;
 	align-items: flex-end;
 	justify-content: flex-end;
-	gap: 10px;
+	gap: 6px;
 
 }
 
@@ -122,7 +122,8 @@
 
 @media (max-width: 440px) {
 	#header {
-		padding: 0 .5rem;
+		padding: 0;
+		gap: 2rem;
 	}
 
 	#user_box {
@@ -151,6 +152,37 @@
 	}
 
 	#header {
-		justify-content: space-around;
+		justify-content: space-between;
+		padding: 0 1.5rem;
+	}
+}
+
+.arrowDownIcon {
+	max-width: 1.5rem;
+}
+
+@media (max-width: 560px) {
+	#user_image img {
+		width: 1rem;
+	}
+
+	.list_titles {
+		position: absolute;
+		top: -5rem;
+		right: -.5rem;
+		background-color: #232323;
+
+		/* animation: dropDown .5s ease-in-out; */
+	}
+
+	@keyframes dropDown {
+		0% {
+			top: -5rem;
+		}
+
+		100% {
+			display: block;
+			top: 2rem;
+		}
 	}
 }

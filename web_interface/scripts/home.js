@@ -3,6 +3,38 @@ headers = {
 	'accept': 'application/json',
 }
 $(function () {
+
+	// get window size to change some Items places
+	//window.addEventListener('resize', () => {
+	const windowWidth = $(window).width();
+	if (windowWidth < 560) {
+		const headerTitles = $('.list_titles').toArray();
+		const userBox = $('#user_image').toArray();
+		userBox[0].append(headerTitles[0]);
+		//headerTitles.style = 'display: none';
+		//userBox[0].innerHTML += '<img src="images/arrowDown.png" alt="User" class="arrowDownIcon">';
+	} else {
+		const headerTitles = $('.list_titles').toArray();
+		const arrowDownIcon = $('.arrowDownIcon').toArray();
+		arrowDownIcon[0].remove();
+		headerTitles[0].style = 'display: flex';
+
+	}
+	const arrowDownIcon = $('#user_image').toArray();
+	arrowDownIcon[0].addEventListener('click', () => {
+		const headerTitles = $('.list_titles').toArray();
+		console.log('clicked', headerTitles[0]);
+		if (arrowDownIcon[0].dataset.clicked === 'true') {
+			arrowDownIcon[0].dataset.clicked = 'false';
+			headerTitles[0].style = 'animation: dropUp .5s ease-in-out ; display: none;';
+			return;
+		}
+		arrowDownIcon[0].dataset.clicked = 'true';
+		headerTitles[0].style = 'animation: dropDown .5s ease-in ; display: flex; top: 2rem;';
+
+	})
+	//})
+
 	// search interactivity
 	const searchArea = $(".searchAreaBG");
 	$(".searchIcon").click(function () {
