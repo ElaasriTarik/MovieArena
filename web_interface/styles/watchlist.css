@@ -150,6 +150,17 @@
 @media screen and (max-width: 790px) {
 	.watchContainer {
 		width: 100%;
+		top: 3rem;
+	}
+
+	.watchlistTitle {
+		font-size: 1rem;
+		width: 100%;
+		text-wrap: nowrap;
+	}
+
+	.subInfo {
+		margin-top: 0;
 	}
 
 }

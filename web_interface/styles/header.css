@@ -171,7 +171,7 @@
 		top: -5rem;
 		right: -.5rem;
 		background-color: #232323;
-
+		display: block;
 		/* animation: dropDown .5s ease-in-out; */
 	}
 
