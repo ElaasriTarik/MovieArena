@@ -182,3 +182,31 @@
 	width: 100%;
 	height: 100%;
 }
+
+@media (max-width: 650px) {
+	.userContainer {
+		margin-top: 5.5rem;
+		width: 100%;
+		display: flex;
+		align-items: flex-start;
+		min-height: 20rem;
+		position: relative;
+		gap: 0;
+		flex-direction: column;
+		align-content: center;
+		align-items: center;
+		margin-bottom: 2rem;
+	}
+
+	#mainContent #mainContentBody .movieCard,
+	#latestShowsBody .movieCard,
+	#topRatedShowsBody .movieCard,
+	#mainContentBodySeries .movieCard,
+	#mainContentBodySeries .movieCard {
+		width: 4rem;
+		min-width: 6rem;
+		height: 120%;
+		background-color: #fff;
+		position: relative;
+	}
+}
