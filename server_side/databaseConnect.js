@@ -14,7 +14,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.static('web_interface'));
 app.use(cors({
-	origin: 'https://moviearena.onrender.com',
+	origin: ['https://moviearena.onrender.com', 'http://localhost:5000'],
 }));
 
 app.use(express.json());
@@ -535,6 +535,21 @@ app.get('/getWatchlist', (req, res) => {
 		res.send({ watchlist: results });
 	});
 })
+// removeFromWatchlist
+app.post('/removeFromWatchlist', (req, res) => {
+	const { contentType, movieId, userID } = req.body;
+	//const isMovieOrSerie = contentType === 'movie' ? 'movies' : 'series';
+	const removeFromWatchlist = `DELETE FROM watchlist WHERE id = ? AND userID = ? AND contentType = ?;`;
+	connection.query(removeFromWatchlist, [movieId, userID, contentType], (error, results, fields) => {
+		if (error) {
+			console.error(error);
+			res.status(500).send({ message: 'Database error' });
+			return;
+		}
+		res.send({ message: 'success' });
+	});
+});
+
 
 // function to check if user exists
 function checkUser(username) {

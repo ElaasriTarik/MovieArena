@@ -128,12 +128,15 @@
 
 	#user_box {
 		max-width: 10rem;
+		height: 1rem;
+		align-items: normal;
 	}
 
 	#user_image {
 		min-width: 1.5rem;
 		min-height: auto;
 		max-width: 1.7rem;
+		height: 100%;
 	}
 
 	#user_name p {

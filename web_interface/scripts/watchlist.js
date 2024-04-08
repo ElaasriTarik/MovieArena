@@ -1,7 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search); // Get the URL parameters
 const contentID = urlParams.get('id');
 const contentType = urlParams.get('type')
-const link = 'https://moviearena.onrender.com'
+const link = 'http://localhost:5000'
 
 $(window).on('load', function () {
 	// get watchlist from database
@@ -44,7 +44,7 @@ $(window).on('load', function () {
 									created_by = item.created_by[0].name
 								}
 								watchlist.innerHTML += `
-				<div class="watchlistItem">
+				<div class="watchlistItem" data-movieId=${item.id} data-content=${item.contentType}>
 				<div class="poster">
 					<img src="https://image.tmdb.org/t/p/original/${item.poster_path}" class="watchlistPoster">
 				</div>
@@ -76,4 +76,55 @@ $(window).on('load', function () {
 			//watchlist.innerHTML = watchlistHTML;
 		})
 		.catch(error => console.log(error));
+	// edit button clicked
+	const editBtn = document.querySelector('.editBox');
+
+	editBtn.addEventListener('click', () => {
+		const listItems = document.querySelectorAll('.watchlistItem');
+		console.log('edit');
+		for (let item = 0; item < listItems.length; item++) {
+			const element = listItems[item];
+			console.log(element);
+			element.classList.toggle('editMode');
+			if (element.classList.contains('editMode')) {
+				element.style = 'filter: grayscale(1)';
+				element.innerHTML += '<img src="images/close.png" alt="Delete" class="deleteItem">'
+
+			} else {
+				element.style = 'filter: grayscale(0)';
+				element.removeChild(element.lastChild);
+			}
+		}
+		deleteItem();
+	});
 });
+
+// deleteItem button 
+function deleteItem() {
+	const deleteBtn = document.querySelectorAll('.deleteItem');
+	deleteBtn.forEach(element => {
+		element.addEventListener('click', () => {
+
+			const movieId = element.parentElement.dataset.movieId;
+			const contentType = element.parentElement.dataset.content;
+			fetch(`${link}/removeFromWatchlist`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					contentType: contentType,
+					movieId: parseInt(movieId),
+					userID: localStorage.getItem('id')
+				})
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					if (data.message === 'success') {
+						element.parentElement.remove();
+					}
+				})
+		});
+	});
+
+}
