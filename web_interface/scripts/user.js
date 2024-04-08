@@ -2,7 +2,6 @@
 const usernameDisplay = document.getElementById('username');
 const localFullname = localStorage.getItem('fullname');
 const localUsername = localStorage.getItem('username');
-const link = 'https://moviearena.onrender.com';
 
 if (!localFullname && !localUsername) {
 	usernameDisplay.textContent = 'Login';
@@ -16,6 +15,7 @@ const userId = new URLSearchParams(window.location.search).get('userID');
 let userProfileId;
 let usersUsername;
 
+const link = 'https://moviearena.onrender.com';
 fetch(`${link}/getFollowCount?userId=${userId}`, {
 	method: 'GET',
 	headers: {

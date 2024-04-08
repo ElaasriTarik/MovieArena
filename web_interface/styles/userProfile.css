@@ -209,4 +209,12 @@
 		background-color: #fff;
 		position: relative;
 	}
+
+	.likedMS {
+		width: auto;
+	}
+
+	.aboutUser {
+		width: 95%;
+	}
 }

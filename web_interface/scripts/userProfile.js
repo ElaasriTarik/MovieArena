@@ -34,6 +34,7 @@ if (checkIfUserLoggedIn) {
 		.catch(error => console.log(error));
 }
 // get follow count
+const link = 'https://moviearena.onrender.com';
 fetch(`${link}/getFollowCount?userId=${localStorage.getItem('id')}`, {
 	method: 'GET',
 	headers: {
