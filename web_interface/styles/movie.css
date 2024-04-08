@@ -701,6 +701,12 @@
 		width: 100%;
 		max-width: 100%;
 		margin-top: 1rem;
+		padding-left: .6rem;
+
+	}
+
+	.genres {
+		list-style: 2rem;
 	}
 
 	.watchProviders {
@@ -785,13 +791,15 @@
 	}
 
 	.commentBox>div {
-		width: 100%;
+		max-width: 100%;
 		max-width: 100%;
 	}
 
 	.commentContent {
 		width: 100%;
 		max-width: 100%;
+		height: 4rem;
+		padding-left: .6rem;
 	}
 
 	.comments {
@@ -808,4 +816,25 @@
 	}
 
 	.commentsSection .comments {}
+
+	.actorsContainer .actorBox {
+		min-width: 5rem;
+		max-width: 8rem;
+		min-height: 8rem;
+		margin-right: .3rem;
+		position: relative;
+		border-radius: 4px;
+		overflow: hidden;
+		height: 13rem;
+	}
+
+	.actorImg {
+		height: auto;
+	}
+
+	.movieBox {
+		gap: 0;
+		min-width: 7rem;
+		max-width: 9rem;
+	}
 }

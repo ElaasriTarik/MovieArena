@@ -17,7 +17,7 @@ $(function () {
 		const headerTitles = $('.list_titles').toArray();
 		const arrowDownIcon = $('.arrowDownIcon').toArray();
 		arrowDownIcon[0].remove();
-		headerTitles[0].style = 'display: flex';
+		headerTitles[0].style = 'display: block';
 
 	}
 	const arrowDownIcon = $('#user_image').toArray();
@@ -30,7 +30,7 @@ $(function () {
 			return;
 		}
 		arrowDownIcon[0].dataset.clicked = 'true';
-		headerTitles[0].style = 'animation: dropDown .5s ease-in ; display: flex; top: 2rem;';
+		headerTitles[0].style = 'animation: dropDown .5s ease-in ; display: block; top: 2rem;';
 
 	})
 	//})
