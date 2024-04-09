@@ -154,7 +154,14 @@
 	}
 
 	.list_titles {
+		font-size: 1.2rem;
 		display: none;
+		border-radius: 4px;
+		padding: .2rem;
+	}
+
+	.listIcons {
+		width: 1.5rem;
 	}
 
 	#header {

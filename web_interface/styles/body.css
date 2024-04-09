@@ -346,8 +346,10 @@
 
 @media screen and (max-width: 768px) {
 
-	.slideInfo p {
-		display: none;
+	.slideInfo {
+		display: inline-block;
+		margin-top: 0;
+
 	}
 
 	.favButton {
@@ -403,5 +405,17 @@
 	#topRatedShows h1,
 	#topRatedMovies h1 {
 		font-size: 1.3rem;
+	}
+
+	.slideOverview {
+		display: none;
+	}
+
+	.slideInfo p {
+		margin: 0;
+	}
+
+	.subInfo {
+		margin-top: 0;
 	}
 }
