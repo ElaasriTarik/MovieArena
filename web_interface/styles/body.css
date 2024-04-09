@@ -336,6 +336,14 @@
 	text-align: right;
 }
 
+.addTowatchlist {
+	width: 6.5rem;
+}
+
+.movieImage img {
+	border-radius: .1rem;
+}
+
 @media screen and (max-width: 768px) {
 
 	.slideInfo p {
@@ -362,6 +370,7 @@
 	#topRatedMoviesBody .movieCard {
 		width: 7rem;
 		min-width: 7rem;
+		border-radius: .1rem;
 	}
 
 	#mainContent,
@@ -373,8 +382,12 @@
 
 	.addTowatchlist {
 		position: relative;
-		width: 8.5rem;
+		width: 6rem;
 		height: 2rem;
+	}
+
+	.slideInfo h2 {
+		font-size: 1.3rem;
 	}
 
 	.addTowatchlist>img {

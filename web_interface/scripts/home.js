@@ -26,11 +26,11 @@ $(function () {
 		console.log('clicked', headerTitles[0]);
 		if (arrowDownIcon[0].dataset.clicked === 'true') {
 			arrowDownIcon[0].dataset.clicked = 'false';
-			headerTitles[0].style = 'animation: dropUp .5s ease-in-out ; display: none;';
+			headerTitles[0].style = 'animation: dropUp .3s ease-in-out ; display: none;';
 			return;
 		}
 		arrowDownIcon[0].dataset.clicked = 'true';
-		headerTitles[0].style = 'animation: dropDown .5s ease-in ; display: block; top: 2rem;';
+		headerTitles[0].style = 'animation: dropDown .3s ease-in ; display: block; top: 2rem;';
 
 	})
 	//})
@@ -122,7 +122,7 @@ $(function () {
 					
 					<div class="addTowatchlist">
 					<img src="images/addToBookmark.png" alt="" class="addToWatchlist addToFavourites">
-					<button type="button" id="addToWatchlistBtn">Add to Watchlist</button>
+					<button type="button" id="addToWatchlistBtn">Watchlist</button>
 				</div>
 				</div>
 					</div>

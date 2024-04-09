@@ -128,15 +128,18 @@
 
 	#user_box {
 		max-width: 10rem;
-		height: 1rem;
-		align-items: normal;
+		height: 1.5rem;
+		align-items: center;
 	}
 
 	#user_image {
 		min-width: 1.5rem;
 		min-height: auto;
 		max-width: 1.7rem;
-		height: 100%;
+		height: auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	#user_name p {
@@ -187,5 +190,10 @@
 			display: block;
 			top: 2rem;
 		}
+	}
+
+	.searchIcon {
+		width: 1.5rem;
+		height: 1.2rem;
 	}
 }
