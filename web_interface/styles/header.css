@@ -174,33 +174,58 @@
 	max-width: 1.5rem;
 }
 
+.userBoxInfo {
+	justify-content: space-between;
+	flex-direction: row-reverse;
+}
+
+#user_image {
+	margin-left: 3px;
+}
+
+#user_name {
+	margin-right: -.7rem;
+}
+
 @media (max-width: 560px) {
 	#user_image img {
-		width: 1rem;
+		width: 1.4rem;
 	}
 
-	.list_titles {
-		position: absolute;
-		top: -5rem;
-		right: -.5rem;
-		background-color: #232323;
-		display: block;
-		/* animation: dropDown .5s ease-in-out; */
-	}
-
-	@keyframes dropDown {
-		0% {
-			top: -5rem;
-		}
-
-		100% {
-			display: block;
-			top: 2rem;
-		}
-	}
-
-	.searchIcon {
+	#user_name {
 		width: 1.5rem;
-		height: 1.2rem;
+		height: 100%;
 	}
+
+	#user_name>img {
+		width: 1.3rem;
+		margin-right: -.8rem;
+		margin-top: -.2rem;
+	}
+}
+
+.list_titles {
+	position: absolute;
+	top: -5rem;
+	right: -.5rem;
+	background-color: #232323;
+	display: block;
+	/* animation: dropDown .5s ease-in-out; */
+}
+
+@keyframes dropDown {
+	0% {
+		top: -5rem;
+	}
+
+	100% {
+		display: block;
+		top: 2rem;
+	}
+}
+
+.searchIcon {
+	width: 1.5rem;
+	height: 1.2rem;
+}
 }

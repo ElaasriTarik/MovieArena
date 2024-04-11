@@ -9,7 +9,9 @@ $(function () {
 	const windowWidth = $(window).width();
 	if (windowWidth < 560) {
 		const headerTitles = $('.list_titles').toArray();
-		const userBox = $('#user_image').toArray();
+		const userBox = $('#user_name').toArray();
+		const user_name = $('#user_name').toArray();
+		user_name[0].innerHTML = '<img src="images/icons8-sort-down-100.png" alt="User" class="arrowDownIcon">';
 		userBox[0].append(headerTitles[0]);
 		//headerTitles.style = 'display: none';
 		//userBox[0].innerHTML += '<img src="images/arrowDown.png" alt="User" class="arrowDownIcon">';
@@ -20,7 +22,7 @@ $(function () {
 		headerTitles[0].style = 'display: block';
 
 	}
-	const arrowDownIcon = $('#user_image').toArray();
+	const arrowDownIcon = $('#user_name').toArray();
 	arrowDownIcon[0].addEventListener('click', () => {
 		const headerTitles = $('.list_titles').toArray();
 		console.log('clicked', headerTitles[0]);
