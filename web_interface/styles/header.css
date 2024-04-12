@@ -195,6 +195,7 @@
 	#user_name {
 		width: 1.5rem;
 		height: 100%;
+		margin-left: .8rem;
 	}
 
 	#user_name>img {
