@@ -7,10 +7,12 @@ $(function () {
 	// get window size to change some Items places
 	//window.addEventListener('resize', () => {
 	const windowWidth = $(window).width();
+	let userHTML;
 	if (windowWidth < 560) {
 		const headerTitles = $('.list_titles').toArray();
 		const userBox = $('#user_name').toArray();
 		const user_name = $('#user_name').toArray();
+		userHTML = user_name[0].innerHTML;
 		user_name[0].innerHTML = '<img src="images/icons8-sort-down-100.png" alt="User" class="arrowDownIcon">';
 		userBox[0].append(headerTitles[0]);
 		//headerTitles.style = 'display: none';
@@ -25,6 +27,10 @@ $(function () {
 	const arrowDownIcon = $('#user_name').toArray();
 	arrowDownIcon[0].addEventListener('click', () => {
 		const headerTitles = $('.list_titles').toArray();
+		// const li = document.createElement('li');
+		// li.innerHTML = userHTML;
+
+		// headerTitles[0].append(li);
 		console.log('clicked', headerTitles[0]);
 		if (arrowDownIcon[0].dataset.clicked === 'true') {
 			arrowDownIcon[0].dataset.clicked = 'false';

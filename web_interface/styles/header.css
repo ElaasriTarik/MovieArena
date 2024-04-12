@@ -184,7 +184,7 @@
 }
 
 #user_name {
-	margin-right: -.7rem;
+	margin-right: -.4rem;
 }
 
 @media (max-width: 560px) {
@@ -200,19 +200,20 @@
 
 	#user_name>img {
 		width: 1.3rem;
-		margin-right: -.8rem;
+		margin-right: -.7rem;
 		margin-top: -.2rem;
+	}
+
+	.list_titles {
+		position: absolute;
+		top: -7rem;
+		right: -.5rem;
+		background-color: #232323;
+		display: block;
+		/* animation: dropDown .5s ease-in-out; */
 	}
 }
 
-.list_titles {
-	position: absolute;
-	top: -5rem;
-	right: -.5rem;
-	background-color: #232323;
-	display: block;
-	/* animation: dropDown .5s ease-in-out; */
-}
 
 @keyframes dropDown {
 	0% {
@@ -228,5 +229,4 @@
 .searchIcon {
 	width: 1.5rem;
 	height: 1.2rem;
-}
 }
