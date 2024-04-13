@@ -7,7 +7,9 @@ if (!localFullname && !localUsername) {
 	usernameDisplay.href = '/login.html';
 }
 else {
-	usernameDisplay.textContent = localUsername;
+	usernameDisplay.parentElement.innerHTML = `<a href="userProfile.html" id="username"><img
+						src="images/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+						class="listIcons" style="border-radius: 50%;" /> Profile</a>`;
 }
 const userFullName = document.querySelector('.profileFullname');
 const userUsername = document.querySelector('.profileUsername');
