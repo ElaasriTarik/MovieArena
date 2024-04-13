@@ -1,4 +1,4 @@
-const usernameDisplay = document.getElementsByClassName('username');
+const usernameDisplay = document.getElementsById('username');
 const localFullname = localStorage.getItem('fullname');
 const localUsername = localStorage.getItem('username');
 
