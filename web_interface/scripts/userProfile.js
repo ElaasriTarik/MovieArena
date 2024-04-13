@@ -22,7 +22,7 @@ const checkIfUserLoggedIn = localStorage.getItem('username');
 if (checkIfUserLoggedIn) {
 	//alert('You need to be logged in to see your favourites');
 
-	const link = 'https://moviearena.onrender.com';
+	let link = 'https://moviearena.onrender.com';
 	fetch(`${link}/getFavs?username=${localUsername}`, {
 		method: 'GET',
 		headers: {
@@ -34,7 +34,7 @@ if (checkIfUserLoggedIn) {
 		.catch(error => console.log(error));
 }
 // get follow count
-const link = 'https://moviearena.onrender.com';
+let link = 'https://moviearena.onrender.com';
 fetch(`${link}/getFollowCount?userId=${localStorage.getItem('id')}`, {
 	method: 'GET',
 	headers: {

@@ -57,7 +57,7 @@ $(window).on('load', function () {
 						<p class="watchlistGenres">${item.genres.slice(0, 3).map(genre => genre.name).join(', ')}</p>
 					</div>
 					
-					<div class="watchlistOverview">${item.overview.substring(0, 120)}...</div>
+					<div class="watchlistOverview">${item.overview.substring(0, 90)}...</div>
 					<div class="MovieRatingContainer">
 					<img src="images/star.png" alt="Rating" class="ratingIcon">
 					<h4 class="mainMovieRating"><span class="ratingNumber">${item.vote_average.toFixed(1)}</span> <span class="votesCount">(${item.vote_count} votes)</span></h4>

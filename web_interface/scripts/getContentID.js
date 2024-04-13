@@ -1,10 +1,12 @@
 const urlParams = new URLSearchParams(window.location.search); // Get the URL parameters
 const contentID = urlParams.get('id');
 const contentType = urlParams.get('type')
-const link = 'https://moviearena.onrender.com'
+
 
 $(window).on('load', function () {
 	$(() => {
+
+		const link = 'https://moviearena.onrender.com'
 		$.ajax({
 			url: `https://api.themoviedb.org/3/${contentType}/${contentID}?language=en-US`,
 			type: 'GET',
@@ -294,6 +296,7 @@ $(window).on('load', function () {
 
 });
 function chechIFfavs(data) {
+	const link = 'https://moviearena.onrender.com'
 	fetch(`${link}/checkFav?username=${localStorage.getItem('username')}&movieId=${data.id}&contentType=${contentType}`, {
 		method: 'GET',
 		headers: {
@@ -328,6 +331,7 @@ function makeCardActive() {
 
 const addCommentBtn = $('#addCommentBtn')[0];
 addCommentBtn.addEventListener('click', (e) => {
+	const link = 'https://moviearena.onrender.com'
 	if (localUsername === null) {
 		alert('You need to be logged in to add a comment');
 		return;
@@ -369,6 +373,7 @@ addCommentBtn.addEventListener('click', (e) => {
 });
 
 function getComments() {
+	const link = 'https://moviearena.onrender.com'
 	fetch(`${link}/getComments?contentType=${contentType}&contentID=${contentID}`, {
 		method: 'GET',
 		headers: {
@@ -454,6 +459,7 @@ function rate(dialogueSection) {
 
 // get the rating
 function getRating() {
+	const link = 'https://moviearena.onrender.com'
 	fetch(`${link}/getRating?username=${localStorage.getItem('username')}&contentType=${contentType}&contentID=${contentID}`, {
 		method: 'GET',
 		headers: {
@@ -471,6 +477,7 @@ function getRating() {
 
 
 function checkwatchlist() {
+	const link = 'https://moviearena.onrender.com'
 	fetch(`${link}/checkWatchList?userID=${localStorage.getItem('id')}&contentID=${contentID}&contentType=${contentType}`, {
 		method: 'GET',
 		headers: {
