@@ -1,8 +1,9 @@
 const signupForm = document.querySelector('.signUpForm');
-const link = 'https://moviearena.onrender.com';
+let link = 'https://moviearena.onrender.com';
 signupForm.addEventListener('submit', (e) => {
 	e.preventDefault();
-	const username = document.getElementById('username').value;
+	const username = document.getElementById('usernameForm').value;
+	console.log(username);
 	const fullname = document.getElementById('fullname').value;
 	if (fullname.length === 0 || username.length === 0) {
 		const userAlreadyExists = document.querySelector('.userAlreadyExists');
