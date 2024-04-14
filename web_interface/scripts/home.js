@@ -7,6 +7,11 @@ $(function () {
 	// get window size to change some Items places
 	//window.addEventListener('resize', () => {
 	const windowWidth = $(window).width();
+	const usernameState = $('#username').toArray();
+	if (usernameState[0].textContent === 'Login') {
+		usernameState[0].style = 'flex-direction: row-reverse;'
+		usernameState[0].innerHTML += `<img src="images/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" class="listIcons" style="border-radius: 50%;" />`;
+	}
 	let userHTML;
 	if (windowWidth < 560) {
 		const headerTitles = $('.list_titles').toArray();
