@@ -112,6 +112,7 @@ $(window).on('load', function () {
 										prevStar.dataset.status = 'true';
 										prevStar.src = 'images/colored-star.png';
 									}
+									//dialogueSection.style = 'display: none';
 
 								})
 								//console.log('clicked');
@@ -447,10 +448,11 @@ function rate(dialogueSection) {
 			.then((data) => {
 				//console.log(data);
 				if (data.message === 'success') {
-					dialogueSection.style.display = 'none';
+					//dialogueSection.style.display = 'none';
 					$('.rateIcon').attr('src', 'images/colored-star.png');
 
 					console.log('Rating added successfully');
+					dialogueSection.style.display = 'none';
 					getRating();
 				}
 			});
