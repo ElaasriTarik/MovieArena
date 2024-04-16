@@ -198,6 +198,11 @@
 		margin-bottom: 2rem;
 	}
 
+	#mainContent #mainContentBody,
+	.SeriesLiked #mainContent #mainContentBodySeries {
+		width: 100%;
+	}
+
 	#mainContent #mainContentBody .movieCard,
 	#latestShowsBody .movieCard,
 	#topRatedShowsBody .movieCard,

@@ -183,7 +183,7 @@ let seriesRes = []
 let resultsMovies;
 let resultsSeries;
 function startSearch(contentType, query, rule) {
-	const link = 'https://movie-arena-khaki.vercel.app'
+	const link = 'https://moviearena.onrender.com';
 	if (rule == 'users') {
 		console.log('searching for users');
 		$.ajax({

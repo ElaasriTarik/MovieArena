@@ -16,21 +16,23 @@ let userProfileId;
 let usersUsername;
 
 const link = 'https://moviearena.onrender.com';
-fetch(`${link}/getFollowCount?userId=${userId}`, {
-	method: 'GET',
-	headers: {
-		'Content-Type': 'application/json'
-	}
-})
-	.then((response) => response.json())
-	.then((data) => {
-		const followers = document.querySelector('.followers');
-		const following = document.querySelector('.followings');
-		followers.textContent = 'Followers: ' + data.following;
-		following.textContent = 'Following: ' + data.followers;
+getFollowCount();
+function getFollowCount() {
+	fetch(`${link}/getFollowCount?userId=${userId}`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}
 	})
-	.catch(error => console.log(error));
-
+		.then((response) => response.json())
+		.then((data) => {
+			const followers = document.querySelector('.followers');
+			const following = document.querySelector('.followings');
+			followers.textContent = 'Followers: ' + data.following;
+			following.textContent = 'Following: ' + data.followers;
+		})
+		.catch(error => console.log(error));
+}
 
 // getting user's data
 
@@ -69,7 +71,7 @@ followBtn.addEventListener('click', (e) => {
 		unfollowUser(e);
 		return;
 	}
-	fetch('${link}/followUser', {
+	fetch(`${link}/followUser`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -86,6 +88,7 @@ followBtn.addEventListener('click', (e) => {
 				e.target.textContent = 'Unfollow';
 				e.target.dataset.follow = 'true';
 				e.target.style.backgroundColor = '#ff4d4d';
+				getFollowCount();
 			}
 		});
 });
